@@ -4,24 +4,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/styles.css">
-  <title>Card Finder</title>
+  <title>YGO API</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/navbar.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"></script>
 </head>
 
 <body>
-  <h1>Card finder</h1>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+    </div>
 
-  <form id="myForm">
-    <label for="search">Search</label>
-    <input type="search" name="search" id="searchInput" />
-    <button type="submit">Search</button>
-  </form>
-
-  <div id="searchResults"></div>
-  <div id="resultImages"></div>
-
-  <script src="/main.js"></script>
+    <div class="nav-right">
+      <input type="text" placeholder="Search..." class="search-input" />
+    </div>
+  </nav>
+  <main>
+    <div>
+      <h1>YGO API</h1>
+      <div id="about-ygo">
+        <span>Site to find all sorts of details about YGO cards</span>
+      </div>
+    </div>
+  </main>
+  <section>
+    <div class="random-cards">
+    </div>
+  </section>
 </body>
 
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YGO API</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/navbar.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+    </div>
+
+    <div class="nav-right">
+      <input type="text" placeholder="Search..." class="search-input" />
+    </div>
+  </nav>
+  <h1>Card finder</h1>
+
+  <form id="myForm">
+    <label for="search">Search</label>
+    <input type="search" name="search" id="searchInput" />
+    <button type="submit">Search</button>
+  </form>
+
+  <div id="searchResults"></div>
+  <div id="resultImages"></div>
+
+  <script src="/main.js"></script>
+</body>
+
+</html>
