@@ -15,6 +15,11 @@ h1 {
   justify-content: center;
 }
 
+#about-ygo,
+p {
+  text-align: center;
+}
+
 #formDiv {
   display: flex;
   justify-content: center;
@@ -29,4 +34,9 @@ h1 {
 .cardImgs {
   max-height: 450px;
   margin: 18px;
+}
+
+#random-cards {
+  display: flex;
+  justify-content: center;
 }
