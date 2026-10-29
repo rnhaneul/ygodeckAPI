@@ -9,6 +9,9 @@ body {
   color: aliceblue;
 }
 
+/* =========================
+   NAVBAR
+========================= */
 .navbar {
   display: flex;
   align-items: center;
@@ -32,6 +35,9 @@ body {
   color: #f4b942;
 }
 
+/* =========================
+   HOME PAGE
+========================= */
 .home-page {
   display: flex;
   flex-direction: column;
@@ -69,8 +75,8 @@ body {
 .cardImgs {
   max-height: 430px;
   width: auto;
-  border-radius: 14px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+  border: none;
+  box-shadow: none;
 }
 
 #randCardInfo {
@@ -79,7 +85,6 @@ body {
   border-radius: 14px;
   padding: 18px 20px;
   max-width: 420px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 #randCardInfo ul {
@@ -97,3 +102,74 @@ body {
 #randCardInfo b {
   color: #f4b942;
 }
+
+/* =========================
+   ABOUT PAGE
+========================= */
+#about-ygo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+#about-ygo p {
+  margin: 0;
+  line-height: 1.7;
+  color: #f5f5f5;
+  font-size: 1.05rem;
+}
+
+/* =========================
+   SEARCH PAGE
+========================= */
+#searchResults {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+}
+
+.search-card {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.search-card .card-details {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.search-card .card-details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-card .card-details li {
+  margin-bottom: 6px;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* .search-card .card-details b {
+  color: #f4b942;
+} */
