@@ -12,9 +12,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: rgb(56, 52, 49);
+  background-color: #311D3F;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: aliceblue;
+  color: #f8edf1;
 }
 
 main {
@@ -28,8 +28,8 @@ main {
   display: flex;
   align-items: center;
   padding: 14px 24px;
-  background: rgba(0, 0, 0, 0.18);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: #522546;
+  border-bottom: 1px solid rgba(226, 62, 87, 0.35);
 }
 
 .nav-left {
@@ -38,13 +38,13 @@ main {
 }
 
 .nav-left a {
-  color: white;
+  color: #f8edf1;
   text-decoration: none;
   font-weight: bold;
 }
 
 .nav-left a:hover {
-  color: #f4b942;
+  color: #E23E57;
 }
 
 /* =========================
@@ -62,12 +62,13 @@ main {
 .home-page h1 {
   margin: 0 0 12px;
   font-size: 2.5rem;
+  color: #f8edf1;
 }
 
 .home-page p {
   margin: 0;
   line-height: 1.6;
-  color: #f1f1f1;
+  color: #f8edf1;
 }
 
 .card-showcase {
@@ -92,8 +93,8 @@ main {
 }
 
 #cardFullDetails {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(136, 48, 78, 0.8);
+  border: 1px solid rgba(226, 62, 87, 0.4);
   border-radius: 14px;
   padding: 18px 20px;
   max-width: 420px;
@@ -108,11 +109,11 @@ main {
 #cardFullDetails li {
   margin-bottom: 8px;
   line-height: 1.5;
-  color: #f5f5f5;
+  color: #f8edf1;
 }
 
 #cardFullDetails b {
-  color: #f4b942;
+  color: #f8d9df;
 }
 
 /* =========================
@@ -131,7 +132,7 @@ main {
 #about-ygo p {
   margin: 0;
   line-height: 1.7;
-  color: #f5f5f5;
+  color: #f8edf1;
   font-size: 1.05rem;
 }
 
@@ -163,8 +164,8 @@ main {
 
 .search-card .card-details {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(136, 48, 78, 0.8);
+  border: 1px solid rgba(226, 62, 87, 0.4);
   border-radius: 12px;
   padding: 12px 14px;
 }
@@ -177,31 +178,32 @@ main {
 
 .search-card .card-details li {
   margin-bottom: 6px;
-  color: #f0f0f0;
+  color: #f8edf1;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
 .search-card .card-details b {
-  color: #f4b942;
+  color: #f8d9df;
 }
 
 a {
   text-decoration: none;
-  color: #f7a289;
+  color: #f8edf1;
 }
 
 a:hover {
   text-decoration: underline;
+  color: #E23E57;
 }
 
 /* =========================
    FOOTER
 ========================= */
 .footer {
-  background: rgba(0, 0, 0, 0.18);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  color: #f1f1f1;
+  background: #522546;
+  border-top: 1px solid rgba(226, 62, 87, 0.35);
+  color: #f8edf1;
   text-align: center;
   padding: 12px 16px;
   margin-top: 30px;
