@@ -12,8 +12,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #311D3F;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #311d3f;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
   color: #f8edf1;
 }
 
@@ -44,7 +45,7 @@ main {
 }
 
 .nav-left a:hover {
-  color: #E23E57;
+  color: #e23e57;
 }
 
 /* =========================
@@ -194,7 +195,7 @@ a {
 
 a:hover {
   text-decoration: underline;
-  color: #E23E57;
+  color: #e23e57;
 }
 
 /* =========================

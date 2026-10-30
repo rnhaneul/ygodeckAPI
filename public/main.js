@@ -1,13 +1,13 @@
-const resultsContainer = document.getElementById('searchResults');
-const myForm = document.getElementById('myForm');
+const resultsContainer = document.getElementById("searchResults");
+const myForm = document.getElementById("myForm");
 
-myForm.addEventListener('submit', async (e) => {
+myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const searchTerm = myForm.elements.search.value.trim();
 
   if (!searchTerm) {
-    resultsContainer.innerHTML = "Please enter a valid search value."
+    resultsContainer.innerHTML = "Please enter a valid search value.";
     return;
   }
 
@@ -16,8 +16,8 @@ myForm.addEventListener('submit', async (e) => {
   try {
     const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", {
       params: {
-        fname: searchTerm
-      }
+        fname: searchTerm,
+      },
     });
 
     const cards = response.data.data || [];
@@ -27,7 +27,7 @@ myForm.addEventListener('submit', async (e) => {
       return;
     }
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       const cardWrapper = document.createElement("div");
       cardWrapper.className = "search-card";
 

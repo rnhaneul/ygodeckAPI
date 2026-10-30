@@ -10,12 +10,12 @@ async function getCard(id) {
 
     const card = response.data?.data?.[0];
     if (!card) {
-      container.innerHTML = "No details available."
+      container.innerHTML = "No details available.";
       return;
     }
 
     const newImg = document.createElement("img");
-    newImg.src = `https://images.ygoprodeck.com/images/cards/${id}.jpg`
+    newImg.src = `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
     newImg.className = "cardImgs";
     newImg.title = card.name ?? "card";
     container.appendChild(newImg);
