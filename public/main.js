@@ -7,7 +7,7 @@ myForm.addEventListener('submit', async (e) => {
   const searchTerm = myForm.elements.search.value.trim();
 
   if (!searchTerm) {
-    console.log("Please enter a search value.");
+    resultsContainer.innerHTML = "Please enter a valid search value."
     return;
   }
 
@@ -50,6 +50,8 @@ myForm.addEventListener('submit', async (e) => {
           <li><b>DEF:</b> ${card.def ?? "N/A"}</li>
           <li><b>LEVEL:</b> ${card.level ?? "N/A"}</li>
         </ul>
+        <hr/>
+        <a href="/card/${card.id}/details">View details</a>
       `;
       cardWrapper.appendChild(img);
       cardWrapper.appendChild(details);

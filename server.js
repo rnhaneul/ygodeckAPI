@@ -18,6 +18,12 @@ app.get('/search', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'search.html'));
 });
 
+app.get('/card/:id/details', (req, res) => {
+  const card = req.params.id;
+  // Pending functionality
+  res.sendFile(path.join(__dirname, 'public', 'cardDetails.html'));
+})
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

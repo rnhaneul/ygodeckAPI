@@ -170,6 +170,15 @@ body {
   line-height: 1.4;
 }
 
-/* .search-card .card-details b {
+.search-card .card-details b {
   color: #f4b942;
-} */
+}
+
+a {
+  text-decoration: none;
+  color: #f7a289;
+}
+
+a:hover {
+  text-decoration: underline;
+}

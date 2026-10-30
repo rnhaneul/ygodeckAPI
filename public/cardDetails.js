@@ -1,0 +1,3 @@
+/* 
+Get all the information available about selected card from SEARCH
+*/
