@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const getCard = require('./public/cardDetails.js').getCard;
 
 const app = express();
 const PORT = 5000;
@@ -19,8 +20,6 @@ app.get('/search', (req, res) => {
 });
 
 app.get('/card/:id/details', (req, res) => {
-  const card = req.params.id;
-  // Pending functionality
   res.sendFile(path.join(__dirname, 'public', 'cardDetails.html'));
 })
 

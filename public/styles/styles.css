@@ -62,7 +62,7 @@ body {
   padding: 20px;
 }
 
-.random-cards {
+.single-card-info {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
@@ -79,7 +79,7 @@ body {
   box-shadow: none;
 }
 
-#randCardInfo {
+#cardFullDetails {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
@@ -87,19 +87,19 @@ body {
   max-width: 420px;
 }
 
-#randCardInfo ul {
+#cardFullDetails ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#randCardInfo li {
+#cardFullDetails li {
   margin-bottom: 8px;
   line-height: 1.5;
   color: #f5f5f5;
 }
 
-#randCardInfo b {
+#cardFullDetails b {
   color: #f4b942;
 }
 

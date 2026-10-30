@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Card Details | YGO API</title>
   <link rel="stylesheet" href="/styles/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"></script>
 </head>
 
 <body>
@@ -18,8 +19,14 @@
   </nav>
 
   <section class="card-showcase">
-    <div id="selected-card" class="selected-card"></div>
+    <div id="single-card-info" class="single-card-info"></div>
   </section>
+
+  <script src="/cardDetails.js"></script>
+  <script>
+    const id = window.location.pathname.split('/')[2];
+    getCard(id)
+  </script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 async function getRandom() {
   try {
-    const container = document.getElementById("random-cards");
+    const container = document.getElementById("single-card-info");
     if (!container) return;
 
     const response = await axios.get(
@@ -17,7 +17,7 @@ async function getRandom() {
     container.appendChild(newImg);
 
     const cardInfo = `
-      <div id="randCardInfo">
+      <div id="cardFullDetails">
         <ul>
           <li><b>NAME:</b> ${card.name ?? "N/A"}</li>
           <li><b>ATK:</b> ${card.atk ?? "N/A"}</li>
@@ -33,7 +33,7 @@ async function getRandom() {
 
     container.insertAdjacentHTML("beforeend", cardInfo);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 }
 
