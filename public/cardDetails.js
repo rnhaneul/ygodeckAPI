@@ -15,7 +15,7 @@ async function getCard(id) {
     }
 
     const newImg = document.createElement("img");
-    newImg.src = card.card_images?.[0]?.image_url ?? "";
+    newImg.src = `https://images.ygoprodeck.com/images/cards/${id}.jpg`
     newImg.className = "cardImgs";
     newImg.title = card.name ?? "card";
     container.appendChild(newImg);
