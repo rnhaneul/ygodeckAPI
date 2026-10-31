@@ -1,6 +1,16 @@
 const resultsContainer = document.getElementById("searchResults");
 const myForm = document.getElementById("myForm");
 const filterSelect = document.getElementById("card-filters");
+const levelFilter = document.getElementById("level-filter");
+
+
+filterSelect.addEventListener("change", (ele) => {
+  if (ele.target.value === "level") {
+    levelFilter.style.display = "block";
+  } else {
+    levelFilter.style.display = "none";
+  }
+})
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -21,7 +31,7 @@ myForm.addEventListener("submit", async (e) => {
     if (searchType === "name") {
       params.fname = searchTerm;
     } else if (searchType === "level") {
-      params.level = searchTerm;
+      params.level = levelFilter.value;
     } else if (searchType === "type") {
       params.type = searchTerm;
     } else if (searchType === "attribute") {

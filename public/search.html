@@ -24,12 +24,13 @@
     <form id="myForm" style="display: flex; justify-content: center; gap: 12px; margin: 20px auto;">
       <label for="filters"></label>
       <select name="filters" id="card-filters">
-        <option value="name">Name</option>
+        <option value="name" selected>Name</option>
         <option value="attribute">Attribute</option>
         <option value="type">Type</option>
         <option value="race">Race</option>
         <option value="level">Level</option>
       </select>
+      <input type="number" name="level-filter" id="level-filter" value="0" max="13" min="0" style="display: none;" />
       <label for="search" style="display: none;">Search</label>
       <input type="search" id="searchInput" name="search" placeholder="Search card..." style="
           padding: 10px 14px;
