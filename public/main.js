@@ -26,6 +26,8 @@ myForm.addEventListener("submit", async (e) => {
       params.type = searchTerm;
     } else if (searchType === "attribute") {
       params.attribute = searchTerm;
+    } else if (searchType === "race") {
+      params.race = searchTerm;
     }
 
     const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", {
@@ -65,6 +67,7 @@ myForm.addEventListener("submit", async (e) => {
         <hr/>
         <a href="/card/${card.id}/details">View details</a>
       `;
+      if (resultsContainer.children.length > 49) return;
       cardWrapper.appendChild(img);
       cardWrapper.appendChild(details);
       resultsContainer.appendChild(cardWrapper);
