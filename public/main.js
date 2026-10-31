@@ -1,6 +1,6 @@
 const resultsContainer = document.getElementById("searchResults");
 const myForm = document.getElementById("myForm");
-const filterSelect = document.getElementById("card-filters")
+const filterSelect = document.getElementById("card-filters");
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
