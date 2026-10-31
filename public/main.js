@@ -1,9 +1,11 @@
 const resultsContainer = document.getElementById("searchResults");
 const myForm = document.getElementById("myForm");
+const filterSelect = document.getElementById("card-filters")
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const searchType = filterSelect.value;
   const searchTerm = myForm.elements.search.value.trim();
 
   if (!searchTerm) {
@@ -14,10 +16,20 @@ myForm.addEventListener("submit", async (e) => {
   resultsContainer.innerHTML = "";
 
   try {
+    const params = {};
+
+    if (searchType === "name") {
+      params.fname = searchTerm;
+    } else if (searchType === "level") {
+      params.level = searchTerm;
+    } else if (searchType === "type") {
+      params.type = searchTerm;
+    } else if (searchType === "attribute") {
+      params.attribute = searchTerm;
+    }
+
     const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", {
-      params: {
-        fname: searchTerm,
-      },
+      params,
     });
 
     const cards = response.data.data || [];
@@ -57,6 +69,7 @@ myForm.addEventListener("submit", async (e) => {
       cardWrapper.appendChild(details);
       resultsContainer.appendChild(cardWrapper);
     });
+
   } catch (error) {
     console.error("Error fetching cards:", error.response?.status || error.message);
   }
