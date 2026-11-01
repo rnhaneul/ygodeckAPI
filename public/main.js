@@ -1,14 +1,18 @@
 const resultsContainer = document.getElementById("searchResults");
 const myForm = document.getElementById("myForm");
 const filterSelect = document.getElementById("card-filters");
-const levelFilter = document.getElementById("level-filter");
+const levelFilter = document.getElementById("level_filter");
+const searchInput = document.getElementById("searchInput");
 
-
-filterSelect.addEventListener("change", (ele) => {
-  if (ele.target.value === "level") {
+filterSelect.addEventListener("change", (e) => {
+  if (e.target.value === "level") {
     levelFilter.style.display = "block";
+    searchInput.style.display = "none"
+    searchInput.value = "";
   } else {
     levelFilter.style.display = "none";
+    searchInput.style.display = "block";
+    levelFilter.value = "";
   }
 })
 
@@ -17,8 +21,14 @@ myForm.addEventListener("submit", async (e) => {
 
   const searchType = filterSelect.value;
   const searchTerm = myForm.elements.search.value.trim();
+  const levelValue = myForm.elements.level_filter.value;
 
-  if (!searchTerm) {
+  if (searchType === "level" && levelValue === "") {
+    resultsContainer.innerHTML = "Please enter a level.";
+    return;
+  }
+
+  if (searchType !== "level" && searchTerm === "") {
     resultsContainer.innerHTML = "Please enter a valid search value.";
     return;
   }
@@ -31,7 +41,7 @@ myForm.addEventListener("submit", async (e) => {
     if (searchType === "name") {
       params.fname = searchTerm;
     } else if (searchType === "level") {
-      params.level = levelFilter.value;
+      params.level = Number(levelValue);
     } else if (searchType === "type") {
       params.type = searchTerm;
     } else if (searchType === "attribute") {
@@ -51,7 +61,7 @@ myForm.addEventListener("submit", async (e) => {
       return;
     }
 
-    cards.forEach((card) => {
+    cards.slice(0, 50).forEach((card) => {
       const cardWrapper = document.createElement("div");
       cardWrapper.className = "search-card";
 
@@ -77,7 +87,6 @@ myForm.addEventListener("submit", async (e) => {
         <hr/>
         <a href="/card/${card.id}/details">View details</a>
       `;
-      if (resultsContainer.children.length > 49) return;
       cardWrapper.appendChild(img);
       cardWrapper.appendChild(details);
       resultsContainer.appendChild(cardWrapper);
