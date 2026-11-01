@@ -214,3 +214,27 @@ a:hover {
   margin: 0;
   font-size: 0.85rem;
 }
+
+/* =========================
+   PAGINATION
+========================= */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0px;
+}
+
+.pagination li button {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  border: 1px solid gray;
+  margin: 0 4px;
+  border-radius: 5px;
+}
+
+.pagination li button.active {
+  background-color: #e23e57;
+  color: white;
+}

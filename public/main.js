@@ -96,3 +96,41 @@ myForm.addEventListener("submit", async (e) => {
     console.error("Error fetching cards:", error.response?.status || error.message);
   }
 });
+
+/* 
+Pagination?
+*/
+
+const pageButtons = document.querySelectorAll(".page-btn");
+const prevButton = document.querySelector(".prev-btn");
+const nextButton = document.querySelector(".next-btn");
+const pages = [1, 2, 3, 4, 5]
+
+let currentPage = 1;
+
+function updatePagination() {
+  pageButtons.forEach((btn, index) => {
+    btn.classList.toggle("active", index + 1 === currentPage);
+  });
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentPage === pages.length;
+}
+pageButtons.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    currentPage = index + 1;
+    updatePagination();
+  });
+});
+prevButton.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePagination();
+  }
+});
+nextButton.addEventListener("click", () => {
+  if (currentPage < pages.length) {
+    currentPage++;
+    updatePagination();
+  }
+});
+updatePagination();
