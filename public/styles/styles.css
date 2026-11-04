@@ -218,23 +218,42 @@ a:hover {
 /* =========================
    PAGINATION
 ========================= */
-.pagination {
+#paginationContainer {
   display: flex;
   justify-content: center;
-  list-style: none;
-  padding: 0px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
 }
 
-.pagination li button {
-  display: block;
+#pageNumbers {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#paginationContainer button {
   padding: 8px 12px;
-  text-decoration: none;
-  border: 1px solid gray;
-  margin: 0 4px;
+  background: #522546;
+  color: #f8edf1;
+  border: 1px solid rgba(226, 62, 87, 0.4);
   border-radius: 5px;
+  cursor: pointer;
+  font: inherit;
 }
 
-.pagination li button.active {
+#paginationContainer button:hover:not(:disabled) {
+  background: #88304e;
+}
+
+#paginationContainer button.active {
   background-color: #e23e57;
   color: white;
+}
+
+#paginationContainer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

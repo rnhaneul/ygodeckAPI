@@ -56,17 +56,11 @@
 
     <div id="searchResults"></div>
   </main>
-  <div id="paginationContainer">
-    <ul class="pagination">
-      <li><button class="prev-btn">&laquo; Prev</button></li>
-      <li><button class="page-btn">1</button></li>
-      <li><button class="page-btn">2</button></li>
-      <li><button class="page-btn">3</button></li>
-      <li><button class="page-btn">4</button></li>
-      <li><button class="page-btn">5</button></li>
-      <li><button class="next-btn">Next &raquo;</button></li>
-    </ul>
-  </div>
+  <nav id="paginationContainer" aria-label="Search results pages">
+    <button type="button" class="prev-btn">&laquo; Prev</button>
+    <div id="pageNumbers"></div>
+    <button type="button" class="next-btn">Next &raquo;</button>
+  </nav>
   <footer class="footer">
     <p>© 2026 rnhaneul</p>
   </footer>

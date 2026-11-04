@@ -1,20 +1,122 @@
+/* 
+DOM Elements
+*/
 const resultsContainer = document.getElementById("searchResults");
 const myForm = document.getElementById("myForm");
 const filterSelect = document.getElementById("card-filters");
 const levelFilter = document.getElementById("level_filter");
 const searchInput = document.getElementById("searchInput");
+const prevButton = document.querySelector(".prev-btn");
+const nextButton = document.querySelector(".next-btn");
+const pageNumbers = document.getElementById("pageNumbers");
 
+/* 
+Filter listener/function
+*/
 filterSelect.addEventListener("change", (e) => {
   if (e.target.value === "level") {
     levelFilter.style.display = "block";
-    searchInput.style.display = "none"
+    searchInput.style.display = "none";
     searchInput.value = "";
   } else {
     levelFilter.style.display = "none";
     searchInput.style.display = "block";
     levelFilter.value = "";
   }
-})
+});
+
+/* 
+  Form submit listener
+*/
+let sessionCards = [];
+const paginationLimit = 10;
+let currentPage = 1;
+
+function getTotalPages() {
+  return Math.ceil(sessionCards.length / paginationLimit);
+}
+
+function renderCurrentPage() {
+  resultsContainer.innerHTML = "";
+
+  const startIndex = (currentPage - 1) * paginationLimit;
+  const cardsToShow = sessionCards.slice(
+    startIndex,
+    startIndex + paginationLimit
+  );
+
+  cardsToShow.forEach((card) => {
+    const cardWrapper = document.createElement("div");
+    cardWrapper.className = "search-card";
+
+    const img = document.createElement("img");
+    if (Array.isArray(card.card_images) && card.card_images.length > 0) {
+      img.src = card.card_images[0].image_url;
+    } else {
+      img.src = "";
+    }
+
+    img.alt = card.name || "Card image";
+
+    const details = document.createElement("div");
+    details.className = "card-details";
+
+    details.innerHTML = `
+      <ul>
+        <li><b>NAME:</b> ${card.name || "N/A"}</li>
+        <li><b>ATK:</b> ${card.atk ?? "N/A"}</li>
+        <li><b>DEF:</b> ${card.def ?? "N/A"}</li>
+        <li><b>LEVEL:</b> ${card.level ?? "N/A"}</li>
+      </ul>
+      <hr/>
+      <a href="/card/${card.id}/details">View details</a>
+    `;
+
+    cardWrapper.appendChild(img);
+    cardWrapper.appendChild(details);
+    resultsContainer.appendChild(cardWrapper);
+  });
+}
+
+function renderPageButtons() {
+  pageNumbers.innerHTML = "";
+
+  const totalPages = getTotalPages();
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = i;
+    btn.className = "page-btn";
+
+    if (i === currentPage) {
+      btn.classList.add("active");
+    }
+
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      renderCurrentPage();
+      renderPageButtons();
+      updatePaginationButtons();
+    });
+
+    pageNumbers.appendChild(btn);
+  }
+}
+
+function updatePaginationButtons() {
+  const pageButtons = document.querySelectorAll(".page-btn");
+  const totalPages = getTotalPages();
+
+  pageButtons.forEach((btn, index) => {
+    const pageNumber = index + 1;
+    btn.classList.toggle("active", pageNumber === currentPage);
+    btn.disabled = pageNumber > totalPages;
+  });
+
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentPage >= totalPages;
+}
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -55,82 +157,39 @@ myForm.addEventListener("submit", async (e) => {
     });
 
     const cards = response.data.data || [];
+    sessionCards = cards;
+    currentPage = 1;
 
     if (!cards.length) {
       resultsContainer.innerHTML = "<p>No cards found.</p>";
+      pageNumbers.innerHTML = "";
+      prevButton.disabled = true;
+      nextButton.disabled = true;
       return;
     }
 
-    cards.slice(0, 50).forEach((card) => {
-      const cardWrapper = document.createElement("div");
-      cardWrapper.className = "search-card";
-
-      const img = document.createElement("img");
-      if (Array.isArray(card.card_images) && card.card_images.length > 0) {
-        img.src = card.card_images[0].image_url;
-      } else {
-        img.src = "";
-      }
-
-      img.alt = card.name || "Card image";
-
-      const details = document.createElement("div");
-      details.className = "card-details";
-
-      details.innerHTML = `
-        <ul>
-          <li><b>NAME:</b> ${card.name || "N/A"}</li>
-          <li><b>ATK:</b> ${card.atk ?? "N/A"}</li>
-          <li><b>DEF:</b> ${card.def ?? "N/A"}</li>
-          <li><b>LEVEL:</b> ${card.level ?? "N/A"}</li>
-        </ul>
-        <hr/>
-        <a href="/card/${card.id}/details">View details</a>
-      `;
-      cardWrapper.appendChild(img);
-      cardWrapper.appendChild(details);
-      resultsContainer.appendChild(cardWrapper);
-    });
-
+    renderCurrentPage();
+    renderPageButtons();
+    updatePaginationButtons();
   } catch (error) {
     console.error("Error fetching cards:", error.response?.status || error.message);
   }
 });
 
-/* 
-Pagination?
-*/
-
-const pageButtons = document.querySelectorAll(".page-btn");
-const prevButton = document.querySelector(".prev-btn");
-const nextButton = document.querySelector(".next-btn");
-const pages = [1, 2, 3, 4, 5]
-
-let currentPage = 1;
-
-function updatePagination() {
-  pageButtons.forEach((btn, index) => {
-    btn.classList.toggle("active", index + 1 === currentPage);
-  });
-  prevButton.disabled = currentPage === 1;
-  nextButton.disabled = currentPage === pages.length;
-}
-pageButtons.forEach((btn, index) => {
-  btn.addEventListener("click", () => {
-    currentPage = index + 1;
-    updatePagination();
-  });
-});
 prevButton.addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage--;
-    updatePagination();
+    renderCurrentPage();
+    renderPageButtons();
+    updatePaginationButtons();
   }
 });
+
 nextButton.addEventListener("click", () => {
-  if (currentPage < pages.length) {
+  if (currentPage < getTotalPages()) {
     currentPage++;
-    updatePagination();
+    renderCurrentPage();
+    renderPageButtons();
+    updatePaginationButtons();
   }
 });
-updatePagination();
