@@ -61,16 +61,32 @@ function renderCurrentPage() {
     const details = document.createElement("div");
     details.className = "card-details";
 
-    details.innerHTML = `
-      <ul>
-        <li><b>NAME:</b> ${card.name || "N/A"}</li>
-        <li><b>ATK:</b> ${card.atk ?? "N/A"}</li>
-        <li><b>DEF:</b> ${card.def ?? "N/A"}</li>
-        <li><b>LEVEL:</b> ${card.level ?? "N/A"}</li>
-      </ul>
-      <hr/>
-      <a href="/card/${card.id}/details">View details</a>
-    `;
+    const list = document.createElement("ul");
+
+    function makeItem(label, value) {
+      const item = document.createElement("li");
+      const boldLabel = document.createElement("strong");
+
+      boldLabel.textContent = `${label}:`;
+      item.append(boldLabel, ` ${value ?? "N/A"}`);
+
+      return item;
+    }
+
+    list.append(
+      makeItem("NAME", card.name || "N/A"),
+      makeItem("ATK", card.atk),
+      makeItem("DEF", card.def),
+      makeItem("LEVEL", card.level)
+    );
+
+    const divider = document.createElement("hr");
+
+    const link = document.createElement("a");
+    link.href = `/card/${card.id}/details`;
+    link.textContent = "View details";
+
+    details.append(list, divider, link);
 
     cardWrapper.appendChild(img);
     cardWrapper.appendChild(details);
@@ -126,12 +142,12 @@ myForm.addEventListener("submit", async (e) => {
   const levelValue = myForm.elements.level_filter.value;
 
   if (searchType === "level" && levelValue === "") {
-    resultsContainer.innerHTML = "Please enter a level.";
+    resultsContainer.textContent = "Please enter a level.";
     return;
   }
 
   if (searchType !== "level" && searchTerm === "") {
-    resultsContainer.innerHTML = "Please enter a valid search value.";
+    resultsContainer.textContent = "Please enter a valid search value.";
     return;
   }
 
