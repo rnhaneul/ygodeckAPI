@@ -1,16 +1,3 @@
-/* 
-Get all the information available about selected card from SEARCH
-*/
-
-/* 
-Draft
-1. click "view details"
-2. save the exact name (str)
-3. use that name to get the ID and pass the ID --- maybe not needed?
-4. get first img as main img to display
-5. get alt artwork (separate section)
-*/
-
 function renderAltArt(card) {
   const artContainer = document.getElementById("art-container");
 
@@ -20,8 +7,6 @@ function renderAltArt(card) {
     const imageUrl = element.image_url;
 
     image.src = imageUrl;
-    image.style.maxHeight = "380px"
-    image.style.margin = "10px"
     artContainer.appendChild(image)
   }
 
@@ -42,7 +27,6 @@ async function getCard(name) {
     }
     const imgSrc = `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
 
-    console.log(card)
     renderAltArt(card)
     render(card, container, imgSrc)
   } catch (err) {

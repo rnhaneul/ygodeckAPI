@@ -113,7 +113,7 @@ main {
   color: #f8edf1;
 }
 
-#cardFullDetails b {
+#cardFullDetails strong {
   color: #f8d9df;
 }
 
@@ -184,10 +184,56 @@ main {
   line-height: 1.4;
 }
 
-.search-card .card-details b {
+.search-card .card-details strong {
   color: #f8d9df;
 }
 
+/* =========================
+   ALTERNATE ARTWORKS
+========================= */
+#art-container {
+  width: calc(100% - 40px);
+  margin: 24px auto;
+  padding: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  background: #522546;
+  border: 1px solid #88304e;
+  border-radius: 12px;
+}
+
+#art-container h3 {
+  flex-basis: 100%;
+  margin: 0 0 4px;
+  color: #f8edf1;
+}
+
+#art-container img {
+  display: block;
+  max-height: 380px;
+  max-width: 100%;
+  width: auto;
+  margin: 0;
+  transition: transform 0.2s ease;
+}
+
+#art-container img:hover {
+  transform: scale(1.03);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  #art-container img {
+    max-height: 300px;
+  }
+}
+
+/* =========================
+   LINKS
+========================= */
 a {
   text-decoration: none;
   color: #f8edf1;
