@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const getCard = require("./public/cardDetails.js").getCard;
+// const getCard = require("./public/cardDetails.js").getCard;
 
 const app = express();
 const PORT = 5000;
