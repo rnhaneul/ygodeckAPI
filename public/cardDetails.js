@@ -14,7 +14,7 @@ async function getCard(id) {
       container.innerHTML = "No details available.";
       return;
     }
-
+    console.log(card)
     render(card, container, imgSrc)
   } catch (err) {
     console.error(err.message);
@@ -23,6 +23,8 @@ async function getCard(id) {
 
 function render(card, container, imgSource) {
   const img = document.createElement("img");
+  const imageUrl = card.card_images?.[0]?.image_url ?? imgSource;
+
   const details = document.createElement("div");
   details.setAttribute("id", "cardFullDetails");
 
@@ -30,6 +32,7 @@ function render(card, container, imgSource) {
 
   list.append(
     makeItem("NAME", card.name || "N/A"),
+    makeItem("ARCHETYPE", card.archetype),
     makeItem("ATK", card.atk),
     makeItem("DEF", card.def),
     makeItem("LEVEL", card.level),
@@ -40,7 +43,7 @@ function render(card, container, imgSource) {
   );
 
   img.alt = card.name || "Card image";
-  img.src = card.card_images?.[0]?.image_url ?? imgSource;
+  if (imageUrl) img.src = imageUrl;
   img.className = "cardImgs";
   img.title = card.name ?? "card";
 
