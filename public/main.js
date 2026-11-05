@@ -83,7 +83,8 @@ function renderCurrentPage() {
     const divider = document.createElement("hr");
 
     const link = document.createElement("a");
-    link.href = `/card/${card.name}/details`;
+    const params = new URLSearchParams({ name: card.name });
+    link.href = `/card/details?${params}`;
     link.textContent = "View details";
 
     details.append(list, divider, link);

@@ -19,7 +19,7 @@ app.get("/search", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "search.html"));
 });
 
-app.get("/card/:id/details", (req, res) => {
+app.get("/card/details", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "cardDetails.html"));
 });
 

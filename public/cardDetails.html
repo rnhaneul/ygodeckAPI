@@ -32,8 +32,12 @@
   </footer>
   <script src="/cardDetails.js"></script>
   <script>
-    const name = window.location.pathname.split("/")[2];
-    getCard(name);
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+
+    if (name) {
+      getCard(name);
+    }
   </script>
 </body>
 
