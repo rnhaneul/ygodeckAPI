@@ -22,13 +22,18 @@
       <div id="single-card-info" class="single-card-info"></div>
     </section>
   </main>
+  <section class="artwork-section">
+    <div id="art-container">
+      <h3>Alternate Artworks</h3>
+    </div>
+  </section>
   <footer class="footer">
     <p>© 2026 rnhaneul</p>
   </footer>
   <script src="/cardDetails.js"></script>
   <script>
-    const id = window.location.pathname.split("/")[2];
-    getCard(id);
+    const name = window.location.pathname.split("/")[2];
+    getCard(name);
   </script>
 </body>
 

@@ -83,7 +83,7 @@ function renderCurrentPage() {
     const divider = document.createElement("hr");
 
     const link = document.createElement("a");
-    link.href = `/card/${card.id}/details`;
+    link.href = `/card/${card.name}/details`;
     link.textContent = "View details";
 
     details.append(list, divider, link);

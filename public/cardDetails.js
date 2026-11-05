@@ -1,20 +1,49 @@
 /* 
 Get all the information available about selected card from SEARCH
 */
-async function getCard(id) {
+
+/* 
+Draft
+1. click "view details"
+2. save the exact name (str)
+3. use that name to get the ID and pass the ID --- maybe not needed?
+4. get first img as main img to display
+5. get alt artwork (separate section)
+*/
+
+function renderAltArt(card) {
+  const artContainer = document.getElementById("art-container");
+
+  for (let i = 0; i < card.card_images.length; i++) {
+    const element = card.card_images[i];
+    const image = document.createElement("img");
+    const imageUrl = element.image_url;
+
+    image.src = imageUrl;
+    image.style.maxHeight = "380px"
+    image.style.margin = "10px"
+    artContainer.appendChild(image)
+  }
+
+  console.log(artContainer)
+}
+
+async function getCard(name) {
   try {
-    const imgSrc = `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
     const container = document.getElementById("single-card-info");
     if (!container) return;
 
-    const response = await axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?id=${id}`);
+    const response = await axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${name}`);
 
     const card = response.data?.data?.[0];
     if (!card) {
       container.innerHTML = "No details available.";
       return;
     }
+    const imgSrc = `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
+
     console.log(card)
+    renderAltArt(card)
     render(card, container, imgSrc)
   } catch (err) {
     console.error(err.message);
