@@ -198,7 +198,9 @@ prevButton.addEventListener("click", () => {
     renderCurrentPage();
     renderPageButtons();
     updatePaginationButtons();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
 });
 
 nextButton.addEventListener("click", () => {
@@ -207,5 +209,6 @@ nextButton.addEventListener("click", () => {
     renderCurrentPage();
     renderPageButtons();
     updatePaginationButtons();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
