@@ -14,6 +14,6 @@ npm start
 
 Then visit http://localhost:5000
 
-## What I’m learning
+## What I'm learning
 
 JavaScript, working with APIs, and building a simple site with Express, HTML, and CSS.
