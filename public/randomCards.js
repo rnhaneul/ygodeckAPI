@@ -3,6 +3,8 @@ async function getRandom() {
     const container = document.getElementById("single-card-info");
     if (!container) return;
 
+    container.replaceChildren();
+
     const response = await axios.get(
       "https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1&offset=0&sort=random&cachebust"
     );
@@ -16,6 +18,14 @@ async function getRandom() {
   }
 }
 
+
+const btn = document.getElementById("random-card-btn");
+
+if (btn) {
+  btn.addEventListener("click", () => {
+    getRandom();
+  })
+}
 // Create div container with img and card details
 function render(card, container) {
   const img = document.createElement("img");
@@ -55,4 +65,4 @@ function makeItem(label, value) {
   return item;
 }
 
-getRandom();
+// getRandom();
