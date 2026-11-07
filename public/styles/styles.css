@@ -82,6 +82,17 @@ body {
   color: #f8edf1;
 }
 
+.random-card-button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #e23e57;
+  color: #f8edf1;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1.5%;
+}
+
 .card-showcase {
   padding: 20px;
 }
@@ -161,9 +172,58 @@ body {
   font-size: 1.05rem;
 }
 
+.about-disclaimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /* =========================
    SEARCH PAGE
 ========================= */
+.search-title {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto;
+}
+
+#level_filter {
+  display: none;
+}
+
+.search-input {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #88304e;
+  width: 300px;
+  background: rgba(248, 237, 241, 0.08);
+  color: #f8edf1;
+  outline: none;
+  box-shadow: none;
+}
+
+.search-submit {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #e23e57;
+  color: #f8edf1;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.results-label {
+  display: flex;
+  align-items: center;
+}
+
 #searchResults {
   display: flex;
   flex-wrap: wrap;
