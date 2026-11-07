@@ -37,6 +37,7 @@ body {
 .navbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 12px 24px;
   margin-bottom: 6px;
   background: #522546;
@@ -48,14 +49,57 @@ body {
   gap: 20px;
 }
 
-.nav-left a {
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-left a,
+.nav-actions .nav-button {
   color: #f8edf1;
   text-decoration: none;
   font-weight: bold;
 }
 
-.nav-left a:hover {
+.nav-left a:hover,
+.nav-actions .nav-button:hover {
   color: #e23e57;
+}
+
+.nav-actions .nav-button {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-actions .nav-login {
+  color: #f8edf1;
+}
+
+.nav-actions .nav-login:hover {
+  color: #e23e57;
+  text-decoration: none;
+}
+
+.nav-actions .nav-signup {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #e23e57;
+  border-radius: 15px;
+  background: #e23e57;
+  color: #f8edf1;
+  transition: background-color 0.2s ease;
+}
+
+.nav-actions .nav-signup:hover {
+  background: #c9344c;
+  color: #f8edf1;
+  text-decoration: none;
+}
+
+.nav-actions .nav-button:focus-visible {
+  outline: 2px solid #f8edf1;
+  outline-offset: 3px;
 }
 
 /* =========================
@@ -67,7 +111,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  padding: 30px 20px 10px;
+  padding: clamp(32px, 8vh, 72px) 20px 24px;
 }
 
 .home-page h1 {
@@ -412,8 +456,32 @@ body {
 }
 
 @media (hover: hover) {
+  .random-card-button:hover {
+    transform: translateY(-2px);
+  }
+
   .cardImgs:hover {
     transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .nav-left {
+    gap: 14px;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .nav-actions .nav-button {
+    padding: 7px 10px;
   }
 }
 
