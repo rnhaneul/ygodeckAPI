@@ -49,7 +49,9 @@ function renderCurrentPage() {
     const cardWrapper = document.createElement("div");
     cardWrapper.className = "search-card";
 
+    const imageLink = document.createElement("a");
     const img = document.createElement("img");
+
     if (Array.isArray(card.card_images) && card.card_images.length > 0) {
       img.src = card.card_images[0].image_url;
     } else {
@@ -85,11 +87,12 @@ function renderCurrentPage() {
     const link = document.createElement("a");
     const params = new URLSearchParams({ name: card.name });
     link.href = `/card/details?${params}`;
+    imageLink.href = `/card/details?${params}`
     link.textContent = "View details";
 
     details.append(list, divider, link);
-
-    cardWrapper.appendChild(img);
+    imageLink.appendChild(img)
+    cardWrapper.appendChild(imageLink);
     cardWrapper.appendChild(details);
     resultsContainer.appendChild(cardWrapper);
   });
