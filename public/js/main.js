@@ -9,7 +9,7 @@ const searchInput = document.getElementById("searchInput");
 const prevButton = document.querySelector(".prev-btn");
 const nextButton = document.querySelector(".next-btn");
 const pageNumbers = document.getElementById("pageNumbers");
-
+const limitResults = document.getElementById("limitResults");
 /* 
 Filter listener/function
 */
@@ -29,7 +29,7 @@ filterSelect.addEventListener("change", (e) => {
   Form submit listener
 */
 let sessionCards = [];
-const paginationLimit = 10;
+let paginationLimit;
 let currentPage = 1;
 
 function getTotalPages() {
@@ -137,6 +137,22 @@ function updatePaginationButtons() {
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const optionValue = Number(e.target[4].value);
+  if (optionValue === 10) {
+    paginationLimit = 10;
+  }
+  if (optionValue === 20) {
+    paginationLimit = 20;
+  }
+  if (optionValue === 30) {
+    paginationLimit = 30;
+  }
+  if (optionValue === 40) {
+    paginationLimit = 40;
+  }
+  if (optionValue === 50) {
+    paginationLimit = 50;
+  }
 
   const searchType = filterSelect.value;
   const searchTerm = myForm.elements.search.value.trim();
