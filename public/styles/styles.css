@@ -37,7 +37,8 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  padding: 14px 24px;
+  padding: 12px 24px;
+  margin-bottom: 6px;
   background: #522546;
   border-bottom: 1px solid rgba(226, 62, 87, 0.35);
 }
@@ -243,7 +244,7 @@ body {
 
 #art-container img {
   display: block;
-  max-height: 300px;
+  max-height: 200px;
   max-width: 100%;
   width: auto;
   margin: 0;
@@ -258,7 +259,7 @@ body {
 
 @media (max-width: 600px) {
   #art-container img {
-    max-height: 300px;
+    max-height: 200px;
   }
 }
 

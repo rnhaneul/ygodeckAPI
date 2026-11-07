@@ -1,16 +1,21 @@
+let anchors = [];
 function renderAltArt(card) {
   const artContainer = document.getElementById("art-container");
 
   for (let i = 0; i < card.card_images.length; i++) {
     const element = card.card_images[i];
     const image = document.createElement("img");
+    const imageLink = document.createElement("a");
     const imageUrl = element.image_url;
 
     image.src = imageUrl;
-    artContainer.appendChild(image)
-  }
+    imageLink.setAttribute("id", `cardArt${i + 1}`);
+    imageLink.appendChild(image)
 
-  console.log(artContainer)
+    anchors.push(imageLink)
+
+    artContainer.appendChild(imageLink)
+  }
 }
 
 async function getCard(name) {
@@ -59,6 +64,12 @@ function render(card, container, imgSource) {
   if (imageUrl) img.src = imageUrl;
   img.className = "cardImgs";
   img.title = card.name ?? "card";
+  anchors.forEach(anchor => {
+    anchor.addEventListener("click", () => {
+      img.src = anchor.firstChild.currentSrc;
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+  });
 
   details.append(list);
   container.append(img, details);
