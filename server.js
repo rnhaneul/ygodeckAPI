@@ -43,21 +43,35 @@ app.post("/login", (req, res) => {
 });
 
 // Register a new user
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     return res.status(400).json({ message: "Username and password are required" });
   }
 
-  const existingUser = users.find((user) => user.username === username);
-  if (existingUser) {
-    return res.status(409).json({ message: "Username is already taken" });
+  try {
+    const db = await connectToDatabase();
+    const usersCollection = db.collection("users");
+
+    const existingUser = await usersCollection.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({ message: "Username is already taken" });
+    }
+
+    const result = await usersCollection.insertOne({
+      username,
+      password,
+      createdAt: new Date(),
+    });
+
+    return res.status(201).json({
+      id: result.insertedId,
+      message: `User ${username} registered`,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
   }
-
-  users.push({ username, password });
-
-  res.status(201).json({ message: "User registered" });
 });
 
 app.listen(PORT, () => {
