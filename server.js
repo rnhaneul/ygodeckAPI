@@ -30,9 +30,9 @@ app.get("/account", (req, res) => {
 
 app.post("/users", async (req, res) => {
   try {
-    const { username, email } = req.body;
+    const { username, password } = req.body;
 
-    if (!username || !email) {
+    if (!username || !password) {
       return res.status(400).json({
         message: "Username and email are required.",
       });
