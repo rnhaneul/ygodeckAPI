@@ -1,10 +1,11 @@
 const express = require("express");
 const path = require("path");
-// const getCard = require("./public/cardDetails.js").getCard;
+const { connectToDatabase } = require("./db");
 
 const app = express();
 const PORT = 5000;
 
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
@@ -21,6 +22,30 @@ app.get("/search", (req, res) => {
 
 app.get("/card/details", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "cardDetails.html"));
+});
+
+app.post("/users", async (req, res) => {
+  try {
+    const { username, email } = req.body;
+
+    if (!username || !email) {
+      return res.status(400).json({
+        message: "Username and email are required.",
+      });
+    }
+
+    const db = await connectToDatabase();
+    const result = await db.collection("users").insertOne({
+      username,
+      email,
+      createdAt: new Date(),
+    });
+
+    res.status(201).json({ id: result.insertedId });
+  } catch (error) {
+    console.error("Could not save user:", error);
+    res.status(500).json({ message: "Could not save user." });
+  }
 });
 
 app.listen(PORT, () => {
