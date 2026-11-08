@@ -24,6 +24,10 @@ app.get("/card/details", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "cardDetails.html"));
 });
 
+app.get("/account", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "account.html"))
+})
+
 app.post("/users", async (req, res) => {
   try {
     const { username, email } = req.body;
