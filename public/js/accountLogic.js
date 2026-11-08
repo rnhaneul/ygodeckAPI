@@ -1,21 +1,47 @@
-const myForm = document.getElementById("signup-form");
+const signupForm = document.getElementById("signup-form");
+const loginForm = document.getElementById("login-form");
 
-myForm.addEventListener("submit", async (e) => {
+signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const username = e.target[0].value
-  const password = e.target[1].value
+  const form = e.currentTarget;
+  const username = form.elements.username.value;
+  const password = form.elements.password.value;
+
+  const signupMessage = document.getElementById("signup-message");
+
   try {
-    const params = { username, password }
     const response = await axios
-      .get("http://localhost:5000/account", {
-        params
+      .post("http://localhost:5000/account", {
+        username,
+        password,
       })
 
-    console.log("Test")
-
-    console.log(response);
-
+    signupMessage.textContent = response.data.message || "Could not connect to the server. Please try again later."
+    console.log(response.data.message);
   } catch (err) {
-    console.error("Error doing something??", err.message)
+    signupMessage.textContent = err.response?.data?.message;
+    console.error(err.response?.data?.message || err.message);
+  }
+})
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const username = form.elements.username.value;
+  const password = form.elements.password.value;
+
+  const loginMessage = document.getElementById("login-message");
+
+  try {
+    const response = await axios
+      .post("http://localhost:5000/login", {
+        username,
+        password,
+      })
+    loginMessage.textContent = response.data.message || "Could not connect to the server. Please try again later."
+    console.log(response.data);
+  } catch (err) {
+    loginMessage.textContent = err.response?.data?.message;
+    console.error(err.response?.data?.message || err.message);
   }
 })

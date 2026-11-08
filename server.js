@@ -28,18 +28,25 @@ app.get("/account", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "account.html"))
 })
 
-let users = [];
 // Login endpoint
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
-  const user = users.find((user) => user.username === username);
-
-  if (!user || user.password !== password) {
-    return res.status(401).json({ message: "Invalid username or password" });
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username and password are required" });
   }
+  try {
+    const db = await connectToDatabase();
+    const usersCollection = db.collection("users");
+    const existingUser = await usersCollection.findOne({ username, password });
 
-  res.status(200).json({ message: "Login successful" });
+    if (!existingUser) {
+      return res.status(401).json({ message: "Incorrect username or password" });
+    }
+
+    return res.status(200).json({ message: "Login successful" });
+  } catch (err) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
 });
 
 // Register a new user
@@ -67,7 +74,7 @@ app.post("/account", async (req, res) => {
 
     return res.status(201).json({
       id: result.insertedId,
-      message: `User ${username} registered`,
+      message: `User "${username}" registered successfully!`,
     });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });

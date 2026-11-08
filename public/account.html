@@ -40,6 +40,7 @@
 
           <button type="submit">Log in</button>
         </form>
+        <p id="login-message"></p>
       </section>
 
       <section class="account-card">
@@ -48,13 +49,14 @@
 
         <form class="account-form" id="signup-form" method="post">
           <label for="signup-username">Username</label>
-          <input id="signup-username" name="username" type="text">
+          <input id="signup-username" name="username" type="text" required>
 
           <label for="signup-password">Password</label>
-          <input id="signup-password" name="password" type="password">
+          <input id="signup-password" name="password" type="password" required>
 
           <button type="submit">Create account</button>
         </form>
+        <p id="signup-message"></p>
       </section>
     </div>
   </main>
