@@ -1,3 +1,12 @@
+:root {
+  --bg: #311d3f;
+  --panel: #522546;
+  --panel-alt: #88304e;
+  --accent: #e23e57;
+  --text: #f8edf1;
+  --soft-text: #f8d9df;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -12,23 +21,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #311d3f;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
-    sans-serif;
-  color: #f8edf1;
+  background-color: var(--bg);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: var(--text);
 }
 
 main {
   flex: 1;
-}
-
-body {
-  -webkit-user-select: none;
-  /* Safari */
-  -ms-user-select: none;
-  /* IE 10 and IE 11 */
-  user-select: none;
-  /* Standard syntax */
 }
 
 /* =========================
@@ -40,7 +39,7 @@ body {
   justify-content: space-between;
   padding: 12px 24px;
   margin-bottom: 6px;
-  background: #522546;
+  background: var(--panel);
   border-bottom: 1px solid rgba(226, 62, 87, 0.35);
 }
 
@@ -57,14 +56,14 @@ body {
 
 .nav-left a,
 .nav-actions .nav-button {
-  color: #f8edf1;
+  color: var(--text);
   text-decoration: none;
   font-weight: bold;
 }
 
 .nav-left a:hover,
 .nav-actions .nav-button:hover {
-  color: #e23e57;
+  color: var(--accent);
 }
 
 .nav-actions .nav-button {
@@ -73,32 +72,32 @@ body {
 }
 
 .nav-actions .nav-login {
-  color: #f8edf1;
+  color: var(--text);
 }
 
 .nav-actions .nav-login:hover {
-  color: #e23e57;
+  color: var(--accent);
   text-decoration: none;
 }
 
 .nav-actions .nav-signup {
   display: inline-block;
   padding: 8px 14px;
-  border: 1px solid #e23e57;
+  border: 1px solid var(--accent);
   border-radius: 15px;
-  background: #e23e57;
-  color: #f8edf1;
+  background: var(--accent);
+  color: var(--text);
   transition: background-color 0.2s ease;
 }
 
 .nav-actions .nav-signup:hover {
   background: #c9344c;
-  color: #f8edf1;
+  color: var(--text);
   text-decoration: none;
 }
 
 .nav-actions .nav-button:focus-visible {
-  outline: 2px solid #f8edf1;
+  outline: 2px solid var(--text);
   outline-offset: 3px;
 }
 
@@ -117,21 +116,21 @@ body {
 .home-page h1 {
   margin: 0 0 12px;
   font-size: 2.5rem;
-  color: #f8edf1;
+  color: var(--text);
 }
 
 .home-page p {
   margin: 0;
   line-height: 1.6;
-  color: #f8edf1;
+  color: var(--text);
 }
 
 .random-card-button {
   padding: 10px 18px;
   border-radius: 15px;
   border: none;
-  background: #e23e57;
-  color: #f8edf1;
+  background: var(--accent);
+  color: var(--text);
   font-weight: bold;
   cursor: pointer;
   margin-top: 1.5%;
@@ -145,7 +144,6 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
@@ -157,7 +155,6 @@ body {
   max-height: 480px;
   width: auto;
   border: none;
-  box-shadow: none;
   transition: transform 0.2s ease;
   max-width: 100%;
   height: auto;
@@ -197,15 +194,13 @@ body {
 }
 
 #cardFullDetails li {
-  margin-bottom: 8px;
-  line-height: 1.5;
-  color: #f8edf1;
   margin-bottom: 10px;
   line-height: 1.6;
+  color: var(--text);
 }
 
 #cardFullDetails strong {
-  color: #f8d9df;
+  color: var(--soft-text);
 }
 
 /* =========================
@@ -224,7 +219,7 @@ body {
 #about-ygo p {
   margin: 0;
   line-height: 1.7;
-  color: #f8edf1;
+  color: var(--text);
   font-size: 1.05rem;
   max-width: 60ch;
 }
@@ -268,10 +263,10 @@ body {
 .search-form select,
 .search-form input {
   padding: 8px 12px;
-  border: 1px solid #88304e;
+  border: 1px solid var(--panel-alt);
   border-radius: 15px;
-  background: #522546;
-  color: #f8edf1;
+  background: var(--panel);
+  color: var(--text);
 }
 
 .search-form .search-input {
@@ -282,7 +277,7 @@ body {
 
 .search-form select:focus,
 .search-form input:focus {
-  outline: 2px solid #e23e57;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -295,8 +290,8 @@ body {
   padding: 10px 18px;
   border: none;
   border-radius: 15px;
-  background: #e23e57;
-  color: #f8edf1;
+  background: var(--accent);
+  color: var(--text);
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -358,28 +353,27 @@ body {
 
 .search-card .card-details li {
   margin-bottom: 6px;
-  color: #f8edf1;
+  color: var(--text);
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
 .search-card .card-details strong {
-  color: #f8d9df;
+  color: var(--soft-text);
 }
 
 /* =========================
    ALTERNATE ARTWORKS
 ========================= */
 #art-container {
-  width: calc(100% - 40px);
   margin: 24px auto;
   padding: 18px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 16px;
-  background: #522546;
-  border: 1px solid #88304e;
+  background: var(--panel);
+  border: 1px solid var(--panel-alt);
   border-radius: 12px;
   justify-content: space-evenly;
   width: min(100%, 1100px);
@@ -388,7 +382,7 @@ body {
 #art-container h3 {
   flex-basis: 100%;
   margin: 0 0 4px;
-  color: #f8edf1;
+  color: var(--text);
 }
 
 #art-container img {
@@ -412,6 +406,170 @@ body {
   padding: 0 20px 30px;
 }
 
+/* =========================
+   ACCOUNT PAGE
+========================= */
+.account-page {
+  width: min(900px, calc(100% - 32px));
+  margin: 40px auto 0;
+  padding-bottom: 40px;
+}
+
+.account-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.account-forms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.account-card {
+  background: var(--panel);
+  border: 1px solid rgba(226, 62, 87, 0.35);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.account-card h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.account-description {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--soft-text);
+  line-height: 1.5;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-form label {
+  font-weight: bold;
+}
+
+.account-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--panel-alt);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.account-form input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.account-form button {
+  margin-top: 8px;
+  min-height: 42px;
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.account-form button:hover {
+  background: #c9344c;
+}
+
+.account-form button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* =========================
+   LINKS
+========================= */
+a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  background: var(--panel);
+  border-top: 1px solid rgba(226, 62, 87, 0.35);
+  color: var(--text);
+  text-align: center;
+  padding: 12px 16px;
+  margin-top: 30px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+#paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+}
+
+#pageNumbers {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#paginationContainer button {
+  padding: 8px 12px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid rgba(226, 62, 87, 0.4);
+  border-radius: 5px;
+  cursor: pointer;
+  font: inherit;
+}
+
+#paginationContainer button:hover:not(:disabled) {
+  background: var(--panel-alt);
+}
+
+#paginationContainer button.active {
+  background-color: var(--accent);
+  color: white;
+}
+
+#paginationContainer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================
+   RESPONSIVE STYLES
+========================= */
 @media (max-width: 600px) {
   #art-container img {
     max-height: 200px;
@@ -453,6 +611,14 @@ body {
   #art-container {
     width: 100%;
   }
+
+  .account-forms {
+    grid-template-columns: 1fr;
+  }
+
+  .account-card {
+    padding: 20px;
+  }
 }
 
 @media (hover: hover) {
@@ -478,82 +644,10 @@ body {
 
   .nav-actions {
     margin-left: auto;
+    gap: 12px;
   }
 
   .nav-actions .nav-button {
     padding: 7px 10px;
   }
-}
-
-/* =========================
-   LINKS
-========================= */
-a {
-  text-decoration: none;
-  color: #f8edf1;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #e23e57;
-}
-
-/* =========================
-   FOOTER
-========================= */
-.footer {
-  background: #522546;
-  border-top: 1px solid rgba(226, 62, 87, 0.35);
-  color: #f8edf1;
-  text-align: center;
-  padding: 12px 16px;
-  margin-top: 30px;
-}
-
-.footer p {
-  margin: 0;
-  font-size: 0.85rem;
-}
-
-/* =========================
-   PAGINATION
-========================= */
-#paginationContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 16px;
-}
-
-#pageNumbers {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-#paginationContainer button {
-  padding: 8px 12px;
-  background: #522546;
-  color: #f8edf1;
-  border: 1px solid rgba(226, 62, 87, 0.4);
-  border-radius: 5px;
-  cursor: pointer;
-  font: inherit;
-}
-
-#paginationContainer button:hover:not(:disabled) {
-  background: #88304e;
-}
-
-#paginationContainer button.active {
-  background-color: #e23e57;
-  color: white;
-}
-
-#paginationContainer button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }

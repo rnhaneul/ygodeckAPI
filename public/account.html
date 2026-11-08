@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register | YGO API</title>
+  <title>Account | YGO API</title>
   <link rel="stylesheet" href="/styles/styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"></script>
 </head>
@@ -18,18 +18,51 @@
     </div>
 
     <div class="nav-actions">
-      <a class="nav-button nav-login" href="/login">Log in</a>
-      <a class="nav-button nav-signup" href="/signup">Sign up</a>
+      <a class="nav-button nav-login" href="#login-form">Log in</a>
+      <a class="nav-button nav-signup" href="#signup-form">Sign up</a>
     </div>
   </nav>
-  <main>
-    <div>
-      <p>Here's where the thing goes</p>
+
+  <main class="account-page">
+    <h1 class="account-title">Your account</h1>
+
+    <div class="account-forms">
+      <section class="account-card">
+        <h2>Log in</h2>
+        <p class="account-description">Welcome back.</p>
+
+        <form class="account-form" id="login-form" method="post">
+          <label for="login-username">Username</label>
+          <input id="login-username" name="username" type="text" required>
+
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" required>
+
+          <button type="submit">Log in</button>
+        </form>
+      </section>
+
+      <section class="account-card">
+        <h2>Sign up</h2>
+        <p class="account-description">Create an account to get started.</p>
+
+        <form class="account-form" id="signup-form" method="post">
+          <label for="signup-username">Username</label>
+          <input id="signup-username" name="username" type="text" required>
+
+          <label for="signup-password">Password</label>
+          <input id="signup-password" name="password" type="password" required>
+
+          <button type="submit">Create account</button>
+        </form>
+      </section>
     </div>
   </main>
+
   <footer class="footer">
     <p>© 2026 rnhaneul</p>
   </footer>
+
   <script src="/js/accountLogic.js"></script>
 </body>
 
