@@ -43,7 +43,7 @@ app.post("/login", (req, res) => {
 });
 
 // Register a new user
-app.post("/register", async (req, res) => {
+app.post("/account", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
