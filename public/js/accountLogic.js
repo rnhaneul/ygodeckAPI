@@ -17,7 +17,6 @@ signupForm.addEventListener("submit", async (e) => {
       })
 
     signupMessage.textContent = response.data.message || "Could not connect to the server. Please try again later."
-    console.log(response.data.message);
   } catch (err) {
     signupMessage.textContent = err.response?.data?.message;
     console.error(err.response?.data?.message || err.message);
@@ -39,7 +38,6 @@ loginForm.addEventListener("submit", async (e) => {
         password,
       })
     loginMessage.textContent = response.data.message || "Could not connect to the server. Please try again later."
-    console.log(response.data);
   } catch (err) {
     loginMessage.textContent = err.response?.data?.message;
     console.error(err.response?.data?.message || err.message);
