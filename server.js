@@ -46,9 +46,15 @@ app.get("/account", (req, res) => {
 
 // middleware to test if authenticated
 function isAuthenticated(req, res, next) {
-  if (req.session.user) next();
-  else next('route');
+  if (req.session.user) {
+    return next();
+  }
+  return res.status(401).json({ message: "Please login first" })
 }
+
+app.get("/myaccount", isAuthenticated, (req, res) => {
+  res.json({ username: req.session.user })
+})
 
 // Login endpoint
 app.post("/login", async (req, res, next) => {
@@ -78,6 +84,15 @@ app.post("/login", async (req, res, next) => {
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong" });
   }
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ message: "Could not log out" });
+    }
+    return res.status(200).json({ message: "Logged out" });
+  });
 });
 
 // Register a new user
