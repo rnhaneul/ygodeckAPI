@@ -12,15 +12,6 @@ app.use(
     secret: "lesbians4eva",
     resave: false,
     saveUninitialized: false,
-    // cookie: function (req) {
-    //   var match = req.url.match(/^\/([^/]+)/);
-    //   return {
-    //     path: match ? '/' + match[1] : '/',
-    //     httpOnly: true,
-    //     secure: req.secure || false,
-    //     maxAge: 60000,
-    //   };
-    // },
   })
 );
 

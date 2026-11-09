@@ -38,6 +38,7 @@ loginForm.addEventListener("submit", async (e) => {
         password,
       })
     loginMessage.textContent = response.data.message || "Could not connect to the server. Please try again later."
+    window.location.reload();
   } catch (err) {
     loginMessage.textContent = err.response?.data?.message;
     console.error(err.response?.data?.message || err.message);

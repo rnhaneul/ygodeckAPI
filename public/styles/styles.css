@@ -7,6 +7,10 @@
   --soft-text: #f8d9df;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -94,6 +98,22 @@ main {
   background: #c9344c;
   color: var(--text);
   text-decoration: none;
+}
+
+.nav-actions .nav-logout {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 15px;
+  background: var(--accent);
+  color: var(--text);
+  transition: background-color 0.2s ease;
+}
+
+.nav-actions .nav-logout:hover {
+  background: #c9344c;
+  color: var(--text);
+  cursor: pointer;
 }
 
 .nav-actions .nav-button:focus-visible {
