@@ -18,8 +18,10 @@
     </div>
 
     <div class="nav-actions">
-      <a class="nav-button nav-login" id="login-btn" href="/account">Log in</a>
-      <a class="nav-button nav-signup" id="signup-btn" href="/account">Sign up</a>
+      <a class="nav-button nav-login" href="/account#login-form">Log in</a>
+      <a class="nav-button nav-signup" href="/account#signup-form">Sign up</a>
+      <span id="welcomeText"></span>
+      <button class="nav-button nav-logout" id="logoutBtn" type="button">Logout</button>
     </div>
   </nav>
   <main>
@@ -44,6 +46,7 @@
       getCard(name);
     }
   </script>
+  <script src="/js/authUI.js"></script>
 </body>
 
 </html>

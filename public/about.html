@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | YGO API</title>
   <link rel="stylesheet" href="/styles/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"></script>
 </head>
 
 <body>
@@ -17,8 +18,10 @@
     </div>
 
     <div class="nav-actions">
-      <a class="nav-button nav-login" id="login-btn" href="/account">Log in</a>
-      <a class="nav-button nav-signup" id="signup-btn" href="/account">Sign up</a>
+      <a class="nav-button nav-login" href="/account#login-form">Log in</a>
+      <a class="nav-button nav-signup" href="/account#signup-form">Sign up</a>
+      <span id="welcomeText"></span>
+      <button class="nav-button nav-logout" id="logoutBtn" type="button">Logout</button>
     </div>
   </nav>
 
@@ -34,6 +37,7 @@
   <footer class="footer">
     <p>© 2026 rnhaneul</p>
   </footer>
+  <script src="/js/authUI.js"></script>
 </body>
 
 </html>
