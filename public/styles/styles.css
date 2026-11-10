@@ -497,6 +497,24 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
+#login-message,
+#signup-message {
+  min-height: 1.2em;
+  margin-top: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+#login-message.error,
+#signup-message.error {
+  color: #ffb0b7;
+}
+
+#login-message.success,
+#signup-message.success {
+  color: #d7f7d6;
+}
+
 /* =========================
    FOOTER
 ========================= */
