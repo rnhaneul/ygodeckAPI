@@ -2,12 +2,13 @@
    THEME AND BASE STYLES
 ========================= */
 :root {
-  --bg: #311d3f;
-  --panel: #522546;
-  --panel-alt: #88304e;
-  --accent: #e23e57;
-  --text: #f8edf1;
-  --soft-text: #f8d9df;
+  --bg: #211b22;
+  --panel: #30272f;
+  --panel-alt: #49333d;
+  --accent: #d45a63;
+  --accent-hover: #b94852;
+  --text: #f6eef1;
+  --soft-text: #e0b7bd;
 }
 
 [hidden] {
@@ -64,10 +65,10 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
+  padding: 14px 28px;
   margin-bottom: 6px;
   background: var(--panel);
-  border-bottom: 1px solid rgba(226, 62, 87, 0.35);
+  border-bottom: 1px solid rgba(212, 90, 99, 0.35);
 }
 
 .nav-left {
@@ -78,7 +79,7 @@ input:focus-visible {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
 }
 
 .nav-left a,
@@ -98,15 +99,16 @@ input:focus-visible {
   display: inline-block;
   padding: 8px 14px;
   border: 1px solid var(--accent);
-  border-radius: 15px;
+  border-radius: 10px;
   background: var(--accent);
   color: var(--text);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: background-color 0.2s ease;
 }
 
 .nav-actions .nav-signup:hover,
 .nav-actions .nav-logout:hover {
-  background: #c9344c;
+  background: var(--accent-hover);
   color: var(--text);
   text-decoration: none;
 }
@@ -123,7 +125,7 @@ input:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(32px, 8vh, 72px) 20px 24px;
+  padding: 56px 20px 36px;
   text-align: center;
 }
 
@@ -148,14 +150,18 @@ input:focus-visible {
   color: var(--text);
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.random-card-button:hover {
+  background: var(--accent-hover);
 }
 
 /* =========================
    CARD DETAILS AND SHOWCASE
 ========================= */
 .card-showcase {
-  padding: 20px;
+  padding: 18px 20px 32px;
 }
 
 .single-card-info {
@@ -163,7 +169,7 @@ input:focus-visible {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: 30px;
+  gap: 28px;
   width: min(100%, 1100px);
   max-width: 1100px;
   margin: 0 auto;
@@ -185,9 +191,9 @@ input:focus-visible {
   max-width: 420px;
   padding: 18px 20px;
   overflow-wrap: anywhere;
-  border: 1px solid rgba(226, 62, 87, 0.4);
+  border: 1px solid rgba(212, 90, 99, 0.4);
   border-radius: 14px;
-  background: rgba(136, 48, 78, 0.8);
+  background: var(--panel-alt);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease;
 }
@@ -303,7 +309,7 @@ input:focus-visible {
 }
 
 .search-form .search-submit:hover {
-  background: #c9344c;
+  background: var(--accent-hover);
 }
 
 .search-form .results-label {
@@ -339,9 +345,10 @@ input:focus-visible {
 .search-card .card-details {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid rgba(226, 62, 87, 0.4);
+  border: 1px solid rgba(212, 90, 99, 0.4);
   border-radius: 12px;
-  background: rgba(136, 48, 78, 0.8);
+  background: var(--panel-alt);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 .search-card .card-details ul {
@@ -421,9 +428,11 @@ input:focus-visible {
 
 .account-card {
   padding: 24px;
-  border: 1px solid rgba(226, 62, 87, 0.35);
+  border: 1px solid rgba(212, 90, 99, 0.35);
   border-radius: 14px;
-  background: var(--panel);
+  background: linear-gradient(180deg,
+      rgba(73, 51, 61, 0.82),
+      rgba(48, 39, 47, 0.95));
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
@@ -453,9 +462,9 @@ input:focus-visible {
   width: 100%;
   min-height: 42px;
   padding: 10px 12px;
-  border: 1px solid var(--panel-alt);
+  border: 1px solid rgba(212, 90, 99, 0.35);
   border-radius: 8px;
-  background: var(--bg);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   font-size: 1rem;
 }
@@ -469,17 +478,18 @@ input:focus-visible {
   min-height: 42px;
   margin-top: 8px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--accent);
   color: var(--text);
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+  transition: background-color 0.2s ease;
 }
 
 .account-form button:hover {
-  background: #c9344c;
+  background: var(--accent-hover);
 }
 
 .account-form button:focus-visible {
@@ -493,7 +503,7 @@ input:focus-visible {
 .footer {
   margin-top: 30px;
   padding: 12px 16px;
-  border-top: 1px solid rgba(226, 62, 87, 0.35);
+  border-top: 1px solid rgba(212, 90, 99, 0.35);
   background: var(--panel);
   color: var(--text);
   text-align: center;
@@ -525,7 +535,7 @@ input:focus-visible {
 
 #paginationContainer button {
   padding: 8px 12px;
-  border: 1px solid rgba(226, 62, 87, 0.4);
+  border: 1px solid rgba(212, 90, 99, 0.4);
   border-radius: 5px;
   background: var(--panel);
   color: var(--text);
