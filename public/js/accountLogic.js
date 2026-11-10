@@ -21,6 +21,13 @@ signupForm.addEventListener("submit", async (e) => {
       "Could not connect to the server. Please try again later.";
 
     form.reset();
+    signupForm.closest(".account-card").hidden = true;
+    loginForm.closest(".account-card").hidden = false;
+
+    const loginMessage = document.getElementById("login-message");
+    loginMessage.textContent = "Account created! You can log in now."
+
+    document.getElementById("login-username").focus();
   } catch (err) {
     signupMessage.textContent = err.response?.data?.message;
     console.error(err.response?.data?.message || err.message);
