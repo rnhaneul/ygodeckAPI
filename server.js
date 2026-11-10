@@ -1,3 +1,10 @@
+require("dotenv").config();
+
+if (!process.env.SESSION_SECRET) {
+  throw new Error("SESSION_SECRET is missing. Add it to your .env file.");
+}
+
+const bcrypt = require("bcryptjs");
 const express = require("express");
 const path = require("path");
 const { connectToDatabase } = require("./db");
@@ -9,7 +16,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: "lesbians4eva",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
@@ -56,9 +63,12 @@ app.post("/login", async (req, res, next) => {
   try {
     const db = await connectToDatabase();
     const usersCollection = db.collection("users");
-    const existingUser = await usersCollection.findOne({ username, password });
+    const existingUser = await usersCollection.findOne({ username });
 
-    if (!existingUser) {
+    if (
+      !existingUser ||
+      !(await bcrypt.compare(password, existingUser.passwordHash))
+    ) {
       return res.status(401).json({ message: "Incorrect username or password" });
     }
     req.session.regenerate(function (err) {
@@ -103,9 +113,11 @@ app.post("/signup", async (req, res) => {
       return res.status(409).json({ message: "Username is already taken" });
     }
 
+    const passwordHash = await bcrypt.hash(password, 10);
+
     const result = await usersCollection.insertOne({
       username,
-      password,
+      passwordHash,
       createdAt: new Date(),
     });
 
