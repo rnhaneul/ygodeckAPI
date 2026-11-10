@@ -1,3 +1,6 @@
+/* =========================
+   THEME AND BASE STYLES
+========================= */
 :root {
   --bg: #311d3f;
   --panel: #522546;
@@ -26,12 +29,32 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--bg);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: var(--text);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 main {
   flex: 1;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Give keyboard users a visible indicator of where they are. */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
 }
 
 /* =========================
@@ -61,8 +84,8 @@ main {
 .nav-left a,
 .nav-actions .nav-button {
   color: var(--text);
-  text-decoration: none;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .nav-left a:hover,
@@ -70,36 +93,7 @@ main {
   color: var(--accent);
 }
 
-.nav-actions .nav-button {
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.nav-actions .nav-login {
-  color: var(--text);
-}
-
-.nav-actions .nav-login:hover {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.nav-actions .nav-signup {
-  display: inline-block;
-  padding: 8px 14px;
-  border: 1px solid var(--accent);
-  border-radius: 15px;
-  background: var(--accent);
-  color: var(--text);
-  transition: background-color 0.2s ease;
-}
-
-.nav-actions .nav-signup:hover {
-  background: #c9344c;
-  color: var(--text);
-  text-decoration: none;
-}
-
+.nav-actions .nav-signup,
 .nav-actions .nav-logout {
   display: inline-block;
   padding: 8px 14px;
@@ -110,15 +104,15 @@ main {
   transition: background-color 0.2s ease;
 }
 
+.nav-actions .nav-signup:hover,
 .nav-actions .nav-logout:hover {
   background: #c9344c;
   color: var(--text);
-  cursor: pointer;
+  text-decoration: none;
 }
 
-.nav-actions .nav-button:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 3px;
+.nav-actions .nav-logout:hover {
+  cursor: pointer;
 }
 
 /* =========================
@@ -129,94 +123,85 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  text-align: center;
   padding: clamp(32px, 8vh, 72px) 20px 24px;
+  text-align: center;
 }
 
 .home-page h1 {
   margin: 0 0 12px;
-  font-size: 2.5rem;
   color: var(--text);
+  font-size: 2.5rem;
 }
 
 .home-page p {
   margin: 0;
-  line-height: 1.6;
   color: var(--text);
+  line-height: 1.6;
 }
 
 .random-card-button {
+  margin-top: 1rem;
   padding: 10px 18px;
-  border-radius: 15px;
   border: none;
+  border-radius: 15px;
   background: var(--accent);
   color: var(--text);
   font-weight: bold;
   cursor: pointer;
-  margin-top: 1.5%;
+  transition: transform 0.2s ease;
 }
 
+/* =========================
+   CARD DETAILS AND SHOWCASE
+========================= */
 .card-showcase {
   padding: 20px;
 }
 
 .single-card-info {
-  max-width: 1100px;
-  margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: center;
   gap: 30px;
-  flex-wrap: wrap;
   width: min(100%, 1100px);
-  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .cardImgs {
-  max-height: 480px;
-  width: auto;
-  border: none;
-  transition: transform 0.2s ease;
-  max-width: 100%;
-  height: auto;
   display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 480px;
+  height: auto;
+  border: none;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.cardImgs:hover {
-  transform: scale(1.10);
-  position: relative;
-  z-index: 1;
+  transition: transform 0.2s ease;
 }
 
 #cardFullDetails {
-  background: rgba(136, 48, 78, 0.8);
+  width: min(100%, 420px);
+  max-width: 420px;
+  padding: 18px 20px;
+  overflow-wrap: anywhere;
   border: 1px solid rgba(226, 62, 87, 0.4);
   border-radius: 14px;
-  padding: 18px 20px;
-  max-width: 420px;
-  transition: transform 0.2s ease;
-  width: min(100%, 420px);
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  background: rgba(136, 48, 78, 0.8);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-}
-
-#cardFullDetails:hover {
-  transform: scale(1.05);
-  position: relative;
-  z-index: 1;
+  transition: transform 0.2s ease;
 }
 
 #cardFullDetails ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 #cardFullDetails li {
   margin-bottom: 10px;
-  line-height: 1.6;
   color: var(--text);
+  line-height: 1.6;
 }
 
 #cardFullDetails strong {
@@ -228,30 +213,30 @@ main {
 ========================= */
 #about-ygo {
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   max-width: 700px;
   margin: 30px auto 0;
   padding: 0 20px;
+  text-align: center;
 }
 
 #about-ygo p {
+  max-width: 60ch;
   margin: 0;
-  line-height: 1.7;
   color: var(--text);
   font-size: 1.05rem;
-  max-width: 60ch;
+  line-height: 1.7;
 }
 
 .about-disclaimer {
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   max-width: 700px;
   margin: 20px auto 30px;
   padding: 0 20px;
+  text-align: center;
   line-height: 1.6;
 }
 
@@ -259,8 +244,8 @@ main {
    SEARCH PAGE
 ========================= */
 .search-title {
-  text-align: center;
   margin-top: 30px;
+  text-align: center;
 }
 
 .search-form {
@@ -336,39 +321,33 @@ main {
 }
 
 .search-card {
-  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  width: min(300px, 100%);
 }
 
 .search-card img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s ease;
 }
 
-.search-card img:hover {
-  transform: scale(1.13);
-  position: relative;
-  z-index: 1;
-}
-
 .search-card .card-details {
   width: 100%;
-  background: rgba(136, 48, 78, 0.8);
+  padding: 12px 14px;
   border: 1px solid rgba(226, 62, 87, 0.4);
   border-radius: 12px;
-  padding: 12px 14px;
+  background: rgba(136, 48, 78, 0.8);
 }
 
 .search-card .card-details ul {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .search-card .card-details li {
@@ -385,18 +364,22 @@ main {
 /* =========================
    ALTERNATE ARTWORKS
 ========================= */
+.artwork-section {
+  padding: 0 20px 30px;
+}
+
 #art-container {
-  margin: 24px auto;
-  padding: 18px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: space-evenly;
   gap: 16px;
-  background: var(--panel);
+  width: min(100%, 1100px);
+  margin: 24px auto;
+  padding: 18px;
   border: 1px solid var(--panel-alt);
   border-radius: 12px;
-  justify-content: space-evenly;
-  width: min(100%, 1100px);
+  background: var(--panel);
 }
 
 #art-container h3 {
@@ -407,23 +390,13 @@ main {
 
 #art-container img {
   display: block;
-  max-height: 200px;
-  max-width: 100%;
   width: auto;
+  max-width: 100%;
+  max-height: 200px;
   margin: 0;
-  transition: transform 0.2s ease;
   cursor: pointer;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-}
-
-#art-container img:hover {
-  transform: scale(1.06);
-  position: relative;
-  z-index: 1;
-}
-
-.artwork-section {
-  padding: 0 20px 30px;
+  transition: transform 0.2s ease;
 }
 
 /* =========================
@@ -436,8 +409,8 @@ main {
 }
 
 .account-title {
-  text-align: center;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .account-forms {
@@ -447,10 +420,10 @@ main {
 }
 
 .account-card {
-  background: var(--panel);
+  padding: 24px;
   border: 1px solid rgba(226, 62, 87, 0.35);
   border-radius: 14px;
-  padding: 24px;
+  background: var(--panel);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
@@ -493,14 +466,14 @@ main {
 }
 
 .account-form button {
-  margin-top: 8px;
   min-height: 42px;
-  background: var(--accent);
-  color: var(--text);
+  margin-top: 8px;
   border: none;
   border-radius: 8px;
-  font-weight: bold;
+  background: var(--accent);
+  color: var(--text);
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -515,28 +488,15 @@ main {
 }
 
 /* =========================
-   LINKS
-========================= */
-a {
-  text-decoration: none;
-  color: var(--text);
-}
-
-a:hover {
-  text-decoration: underline;
-  color: var(--accent);
-}
-
-/* =========================
    FOOTER
 ========================= */
 .footer {
-  background: var(--panel);
+  margin-top: 30px;
+  padding: 12px 16px;
   border-top: 1px solid rgba(226, 62, 87, 0.35);
+  background: var(--panel);
   color: var(--text);
   text-align: center;
-  padding: 12px 16px;
-  margin-top: 30px;
 }
 
 .footer p {
@@ -549,26 +509,26 @@ a:hover {
 ========================= */
 #paginationContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 16px;
 }
 
 #pageNumbers {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
 }
 
 #paginationContainer button {
   padding: 8px 12px;
-  background: var(--panel);
-  color: var(--text);
   border: 1px solid rgba(226, 62, 87, 0.4);
   border-radius: 5px;
+  background: var(--panel);
+  color: var(--text);
   cursor: pointer;
   font: inherit;
 }
@@ -588,13 +548,45 @@ a:hover {
 }
 
 /* =========================
+   HOVER EFFECTS
+   Keep hover-only effects off touch-first devices.
+========================= */
+@media (hover: hover) {
+  .random-card-button:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.15);
+  }
+
+  .cardImgs:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.05);
+  }
+
+  #cardFullDetails:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.05);
+  }
+
+  .search-card img:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.13);
+  }
+
+  #art-container img:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* =========================
    RESPONSIVE STYLES
 ========================= */
 @media (max-width: 600px) {
-  #art-container img {
-    max-height: 200px;
-  }
-
   .search-form {
     flex-direction: column;
     align-items: stretch;
@@ -641,21 +633,11 @@ a:hover {
   }
 }
 
-@media (hover: hover) {
-  .random-card-button:hover {
-    transform: translateY(-2px);
-  }
-
-  .cardImgs:hover {
-    transform: scale(1.05);
-  }
-}
-
 @media (max-width: 480px) {
   .navbar {
-    padding: 12px 16px;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
   }
 
   .nav-left {
@@ -663,8 +645,8 @@ a:hover {
   }
 
   .nav-actions {
-    margin-left: auto;
     gap: 12px;
+    margin-left: auto;
   }
 
   .nav-actions .nav-button {
