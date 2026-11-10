@@ -10,28 +10,14 @@ const prevButton = document.querySelector(".prev-btn");
 const nextButton = document.querySelector(".next-btn");
 const pageNumbers = document.getElementById("pageNumbers");
 const limitResults = document.getElementById("limitResults");
-/* 
-Filter listener/function
-*/
-filterSelect.addEventListener("change", (e) => {
-  if (e.target.value === "level") {
-    levelFilter.style.display = "block";
-    searchInput.style.display = "none";
-    searchInput.value = "";
-  } else {
-    levelFilter.style.display = "none";
-    searchInput.style.display = "block";
-    levelFilter.value = "";
-  }
-});
 
-/* 
-  Form submit listener
-*/
 let sessionCards = [];
 let paginationLimit;
 let currentPage = 1;
 
+/* 
+  Functions for pagination and generating image containers with images
+*/
 function getTotalPages() {
   return Math.ceil(sessionCards.length / paginationLimit);
 }
@@ -137,6 +123,21 @@ function updatePaginationButtons() {
   prevButton.disabled = currentPage === 1;
   nextButton.disabled = currentPage >= totalPages;
 }
+
+/* 
+  Listeners
+*/
+filterSelect.addEventListener("change", (e) => {
+  if (e.target.value === "level") {
+    levelFilter.style.display = "block";
+    searchInput.style.display = "none";
+    searchInput.value = "";
+  } else {
+    levelFilter.style.display = "none";
+    searchInput.style.display = "block";
+    levelFilter.value = "";
+  }
+});
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
