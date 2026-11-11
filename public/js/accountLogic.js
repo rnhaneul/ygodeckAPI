@@ -5,6 +5,31 @@ const loginMessage = document.getElementById("login-message");
 const signupSection = document.getElementById("signup-section");
 const loginSection = document.getElementById("login-section");
 
+// Helper functions
+
+function clearMessage(message) {
+  message.textContent = "";
+  message.classList.remove("error", "success");
+}
+
+function setMessage(element, message, className) {
+  element.textContent = message;
+  element.classList.remove("error", "success");
+  element.classList.add(className);
+}
+
+function clearMessageOnInput(form, messageElement) {
+  form.elements.username.addEventListener("input", () => {
+    messageElement.textContent = "";
+    messageElement.classList.remove("error", "success");
+  });
+
+  form.elements.password.addEventListener("input", () => {
+    messageElement.textContent = "";
+    messageElement.classList.remove("error", "success");
+  });
+}
+
 if (
   !signupForm ||
   !loginForm ||
@@ -13,24 +38,6 @@ if (
 ) {
   console.error("Account form elements could not be found.");
 } else {
-  function setMessage(element, message, className) {
-    element.textContent = message;
-    element.classList.remove("error", "success");
-    element.classList.add(className);
-  }
-
-  function clearMessageOnInput(form, messageElement) {
-    form.elements.username.addEventListener("input", () => {
-      messageElement.textContent = "";
-      messageElement.classList.remove("error", "success");
-    });
-
-    form.elements.password.addEventListener("input", () => {
-      messageElement.textContent = "";
-      messageElement.classList.remove("error", "success");
-    });
-  }
-
   clearMessageOnInput(signupForm, signupMessage);
   clearMessageOnInput(loginForm, loginMessage);
 
@@ -54,6 +61,9 @@ if (
       await axios.post("/signup", { username, password });
 
       form.reset();
+
+      clearMessage(signupMessage);
+      clearMessage(loginMessage);
 
       if (signupSection) signupSection.hidden = true;
       if (loginSection) loginSection.hidden = false;
