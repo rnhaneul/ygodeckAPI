@@ -185,17 +185,23 @@ function buildSearchParams(searchType, searchTerm, levelValue) {
 /*
   Listeners
 */
-filterSelect.addEventListener("change", (e) => {
-  if (e.target.value === "level") {
-    levelFilter.style.display = "block";
-    searchInput.style.display = "none";
+function updateSearchFields() {
+  const isLevelSearch = filterSelect.value === "level";
+  levelFilter.style.display = isLevelSearch ? "block" : "none";
+  searchInput.style.display = isLevelSearch ? "none" : "block";
+}
+
+filterSelect.addEventListener("change", () => {
+  updateSearchFields();
+
+  if (filterSelect.value === "level") {
     searchInput.value = "";
   } else {
-    levelFilter.style.display = "none";
-    searchInput.style.display = "block";
-    levelFilter.value = "";
+    levelFilter.value = ""
   }
-});
+})
+
+updateSearchFields();
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();

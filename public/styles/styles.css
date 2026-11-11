@@ -294,7 +294,7 @@ input:focus-visible {
 
 .search-form #level_filter {
   display: none;
-  width: 100px;
+  width: auto;
 }
 
 .search-form .search-submit {
