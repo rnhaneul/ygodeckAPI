@@ -135,7 +135,7 @@ function resetPaginationState() {
 }
 
 function validateSearchInput(searchType, searchTerm, levelValue) {
-  if (searchType == "level" && levelValue === "") {
+  if (searchType === "level" && levelValue === "") {
     return {
       valid: false,
       message: "Please enter a valid level. (0 - 13)"
@@ -202,7 +202,7 @@ myForm.addEventListener("submit", async (e) => {
 
   const validation = validateSearchInput(searchType, searchTerm, levelValue);
 
-  if (!validation.validation) {
+  if (!validation.valid) {
     resultsContainer.textContent = validation.message;
     return;
   }
