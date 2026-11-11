@@ -103,26 +103,56 @@ function renderPageButtons() {
   pageNumbers.innerHTML = "";
 
   const totalPages = getTotalPages();
+  const visiblePages = [1];
 
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.textContent = i;
-    btn.className = "page-btn";
+  if (totalPages > 1) {
+    visiblePages.push(totalPages);
+  }
 
-    if (i === currentPage) {
-      btn.classList.add("active");
+  // Show 2 pages before and after the current page
+  const startPage = Math.max(2, currentPage - 2);
+  const endPage = Math.min(totalPages - 1, currentPage + 2);
+
+  for (let page = startPage; page <= endPage; page++) {
+    if (!visiblePages.includes(page)) {
+      visiblePages.push(page);
+    }
+  }
+
+  visiblePages.sort((a, b) => a - b);
+
+  let previousPage = 0;
+
+  visiblePages.forEach((page) => {
+    // Add ... where pages are skipped
+    if (previousPage && page - previousPage > 1) {
+      const ellipsis = document.createElement("span");
+      ellipsis.className = "pagination-ellipsis";
+      ellipsis.textContent = "...";
+      pageNumbers.appendChild(ellipsis);
     }
 
-    btn.addEventListener("click", () => {
-      currentPage = i;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = page;
+    button.className = "page-btn";
+    button.setAttribute("aria-label", `Page ${page}`);
+
+    if (page === currentPage) {
+      button.classList.add("active");
+      button.setAttribute("aria-current", "page");
+    }
+
+    button.addEventListener("click", () => {
+      currentPage = page;
       renderCurrentPage();
       renderPageButtons();
       updatePaginationButtons();
     });
 
-    pageNumbers.appendChild(btn);
-  }
+    pageNumbers.appendChild(button);
+    previousPage = page;
+  });
 }
 
 function updatePaginationButtons() {
@@ -197,9 +227,9 @@ filterSelect.addEventListener("change", () => {
   if (filterSelect.value === "level") {
     searchInput.value = "";
   } else {
-    levelFilter.value = ""
+    levelFilter.value = "";
   }
-})
+});
 
 updateSearchFields();
 
