@@ -127,6 +127,48 @@ function updatePaginationButtons() {
   nextButton.disabled = currentPage >= totalPages;
 }
 
+function resetPaginationState() {
+  paginationContainer.hidden = true;
+  pageNumbers.innerHTML = "";
+  prevButton.disabled = true;
+  nextButton.disabled = true;
+}
+
+function validateSearchInput(searchType, searchTerm, levelValue) {
+  if (searchType == "level" && levelValue === "") {
+    return {
+      valid: false,
+      message: "Please enter a valid level. (0 - 13)"
+    };
+  }
+
+  if (searchType !== "level" && searchTerm === "") {
+    return {
+      valid: false,
+      message: "Please enter a valid search value."
+    };
+  }
+
+  return { valid: true };
+}
+
+function buildSearchParams(searchType, searchTerm, levelValue) {
+  const params = {};
+
+  if (searchType === "name") {
+    params.fname = searchTerm;
+  } else if (searchType === "level") {
+    params.level = Number(levelValue);
+  } else if (searchType === "type") {
+    params.type = searchTerm;
+  } else if (searchType === "attribute") {
+    params.attribute = searchTerm;
+  } else if (searchType === "race") {
+    params.race = searchTerm;
+  }
+
+  return params;
+}
 /* 
   Listeners
 */
@@ -144,58 +186,31 @@ filterSelect.addEventListener("change", (e) => {
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  paginationContainer.hidden = true;
-  pageNumbers.innerHTML = "";
-  prevButton.disabled = true;
-  nextButton.disabled = true;
 
-  const optionValue = Number(e.target[4].value);
-  if (optionValue === 10) {
-    paginationLimit = 10;
-  }
-  if (optionValue === 20) {
-    paginationLimit = 20;
-  }
-  if (optionValue === 30) {
-    paginationLimit = 30;
-  }
-  if (optionValue === 40) {
-    paginationLimit = 40;
-  }
-  if (optionValue === 50) {
-    paginationLimit = 50;
+  resetPaginationState();
+
+  const availableLimits = [10, 20, 30, 40, 50];
+  const optionValue = Number(limitResults.value);
+
+  if (availableLimits.includes(optionValue)) {
+    paginationLimit = optionValue;
   }
 
   const searchType = filterSelect.value;
   const searchTerm = myForm.elements.search.value.trim();
   const levelValue = myForm.elements.level_filter.value;
 
-  if (searchType === "level" && levelValue === "") {
-    resultsContainer.textContent = "Please enter a level.";
-    return;
-  }
+  const validation = validateSearchInput(searchType, searchTerm, levelValue);
 
-  if (searchType !== "level" && searchTerm === "") {
-    resultsContainer.textContent = "Please enter a valid search value.";
+  if (!validation.validation) {
+    resultsContainer.textContent = validation.message;
     return;
   }
 
   resultsContainer.textContent = "Searching for cards...";
 
   try {
-    const params = {};
-
-    if (searchType === "name") {
-      params.fname = searchTerm;
-    } else if (searchType === "level") {
-      params.level = Number(levelValue);
-    } else if (searchType === "type") {
-      params.type = searchTerm;
-    } else if (searchType === "attribute") {
-      params.attribute = searchTerm;
-    } else if (searchType === "race") {
-      params.race = searchTerm;
-    }
+    const params = buildSearchParams(searchType, searchTerm, levelValue);
 
     const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", {
       params,
@@ -207,12 +222,10 @@ myForm.addEventListener("submit", async (e) => {
 
     if (!cards.length) {
       resultsContainer.innerHTML = "<p>No cards found.</p>";
-      pageNumbers.innerHTML = "";
-      prevButton.disabled = true;
-      nextButton.disabled = true;
-      paginationContainer.hidden = true;
+      resetPaginationState();
       return;
     }
+
     paginationContainer.hidden = false;
     renderCurrentPage();
     renderPageButtons();
