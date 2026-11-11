@@ -368,6 +368,14 @@ input:focus-visible {
   color: var(--soft-text);
 }
 
+#resultsSummary {
+  min-height: 1.5em;
+  margin: 12px 20px 0;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.5;
+}
+
 /* =========================
    ALTERNATE ARTWORKS
 ========================= */

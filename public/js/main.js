@@ -1,4 +1,4 @@
-/* 
+/*
 DOM Elements
 */
 const resultsContainer = document.getElementById("searchResults");
@@ -11,6 +11,7 @@ const nextButton = document.querySelector(".next-btn");
 const pageNumbers = document.getElementById("pageNumbers");
 const limitResults = document.getElementById("limitResults");
 const paginationContainer = document.getElementById("paginationContainer");
+const resultsSummary = document.getElementById("resultsSummary");
 
 paginationContainer.hidden = true;
 
@@ -18,11 +19,19 @@ let sessionCards = [];
 let paginationLimit;
 let currentPage = 1;
 
-/* 
+/*
   Functions for pagination and generating image containers with images
 */
 function getTotalPages() {
   return Math.ceil(sessionCards.length / paginationLimit);
+}
+
+function updateResultsSummary() {
+  const start = (currentPage - 1) * paginationLimit + 1;
+  const end = Math.min(currentPage * paginationLimit, sessionCards.length);
+
+  resultsSummary.textContent =
+    `Showing ${start}-${end} of ${sessionCards.length} cards`;
 }
 
 function renderCurrentPage() {
@@ -75,16 +84,19 @@ function renderCurrentPage() {
 
     const link = document.createElement("a");
     const params = new URLSearchParams({ name: card.name });
+
     link.href = `/card/details?${params}`;
-    imageLink.href = `/card/details?${params}`
+    imageLink.href = `/card/details?${params}`;
     link.textContent = "View details";
 
     details.append(list, divider, link);
-    imageLink.appendChild(img)
+    imageLink.appendChild(img);
     cardWrapper.appendChild(imageLink);
     cardWrapper.appendChild(details);
     resultsContainer.appendChild(cardWrapper);
   });
+
+  updateResultsSummary();
 }
 
 function renderPageButtons() {
@@ -138,14 +150,14 @@ function validateSearchInput(searchType, searchTerm, levelValue) {
   if (searchType === "level" && levelValue === "") {
     return {
       valid: false,
-      message: "Please enter a valid level. (0 - 13)"
+      message: "Please enter a valid level. (0 - 13)",
     };
   }
 
   if (searchType !== "level" && searchTerm === "") {
     return {
       valid: false,
-      message: "Please enter a valid search value."
+      message: "Please enter a valid search value.",
     };
   }
 
@@ -169,7 +181,8 @@ function buildSearchParams(searchType, searchTerm, levelValue) {
 
   return params;
 }
-/* 
+
+/*
   Listeners
 */
 filterSelect.addEventListener("change", (e) => {
@@ -188,6 +201,8 @@ myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   resetPaginationState();
+  resultsContainer.innerHTML = "";
+  resultsSummary.textContent = "";
 
   const availableLimits = [10, 20, 30, 40, 50];
   const optionValue = Number(limitResults.value);
@@ -203,25 +218,26 @@ myForm.addEventListener("submit", async (e) => {
   const validation = validateSearchInput(searchType, searchTerm, levelValue);
 
   if (!validation.valid) {
-    resultsContainer.textContent = validation.message;
+    resultsSummary.textContent = validation.message;
     return;
   }
 
-  resultsContainer.textContent = "Searching for cards...";
+  resultsSummary.textContent = "Searching for cards...";
 
   try {
     const params = buildSearchParams(searchType, searchTerm, levelValue);
 
-    const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php", {
-      params,
-    });
+    const response = await axios.get(
+      "https://db.ygoprodeck.com/api/v7/cardinfo.php",
+      { params }
+    );
 
     const cards = response.data.data || [];
     sessionCards = cards;
     currentPage = 1;
 
     if (!cards.length) {
-      resultsContainer.innerHTML = "<p>No cards found.</p>";
+      resultsSummary.textContent = "No cards found.";
       resetPaginationState();
       return;
     }
@@ -238,11 +254,12 @@ myForm.addEventListener("submit", async (e) => {
       apiMessage?.includes("No card matching your query was found")
     ) {
       sessionCards = [];
-      resultsContainer.textContent = "No cards found.";
+      resultsSummary.textContent = "No cards found.";
       return;
     }
 
-    resultsContainer.textContent = "Unable to load cards. Please try again.";
+    resultsSummary.textContent = "Unable to load cards. Please try again.";
+
     console.error(
       "Error fetching cards:",
       error.response?.status || error.message
@@ -256,9 +273,8 @@ prevButton.addEventListener("click", () => {
     renderCurrentPage();
     renderPageButtons();
     updatePaginationButtons();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
-
 });
 
 nextButton.addEventListener("click", () => {
@@ -267,6 +283,6 @@ nextButton.addEventListener("click", () => {
     renderCurrentPage();
     renderPageButtons();
     updatePaginationButtons();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 });

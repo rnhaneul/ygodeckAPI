@@ -29,6 +29,7 @@
     <h1 class="search-title">Card finder</h1>
 
     <form id="myForm" class="search-form">
+      <label for="card-filters">Search by</label>
       <select name="filters" id="card-filters">
         <option value="name" selected>Name</option>
         <option value="attribute">Attribute</option>
@@ -36,9 +37,15 @@
         <option value="race">Race</option>
         <option value="level">Level</option>
       </select>
+
+      <label for="level_filter" hidden>Level</label>
       <input type="number" name="level_filter" id="level_filter" max="13" min="0" />
+
+      <label for="searchInput" hidden>Search term</label>
       <input type="search" id="searchInput" name="search" placeholder="Search card..." class="search-input" />
+
       <button type="submit" class="search-submit">Search</button>
+
       <label for="limitResults" class="results-label">Results per page</label>
       <select name="limit" id="limitResults">
         <option value="10">10</option>
@@ -49,16 +56,20 @@
       </select>
     </form>
 
+    <p id="resultsSummary" aria-live="polite"></p>
     <div id="searchResults"></div>
   </main>
-  <nav id="paginationContainer" aria-label="Search results pages">
+
+  <nav id="paginationContainer" aria-label="Search results pages" hidden>
     <button type="button" class="prev-btn">&laquo; Prev</button>
     <div id="pageNumbers"></div>
     <button type="button" class="next-btn">Next &raquo;</button>
   </nav>
+
   <footer class="footer">
     <p>© 2026 rnhaneul</p>
   </footer>
+
   <script src="/js/main.js"></script>
   <script src="/js/authUI.js"></script>
 </body>
