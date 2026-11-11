@@ -10,6 +10,9 @@ const prevButton = document.querySelector(".prev-btn");
 const nextButton = document.querySelector(".next-btn");
 const pageNumbers = document.getElementById("pageNumbers");
 const limitResults = document.getElementById("limitResults");
+const paginationContainer = document.getElementById("paginationContainer");
+
+paginationContainer.hidden = true;
 
 let sessionCards = [];
 let paginationLimit;
@@ -141,6 +144,11 @@ filterSelect.addEventListener("change", (e) => {
 
 myForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  paginationContainer.hidden = true;
+  pageNumbers.innerHTML = "";
+  prevButton.disabled = true;
+  nextButton.disabled = true;
+
   const optionValue = Number(e.target[4].value);
   if (optionValue === 10) {
     paginationLimit = 10;
@@ -172,7 +180,7 @@ myForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  resultsContainer.innerHTML = "";
+  resultsContainer.textContent = "Searching for cards...";
 
   try {
     const params = {};
@@ -202,13 +210,15 @@ myForm.addEventListener("submit", async (e) => {
       pageNumbers.innerHTML = "";
       prevButton.disabled = true;
       nextButton.disabled = true;
+      paginationContainer.hidden = true;
       return;
     }
-
+    paginationContainer.hidden = false;
     renderCurrentPage();
     renderPageButtons();
     updatePaginationButtons();
   } catch (error) {
+    resultsContainer.textContent = "Unable to load cards. Please try again.";
     console.error("Error fetching cards:", error.response?.status || error.message);
   }
 });
