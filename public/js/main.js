@@ -231,6 +231,11 @@ myForm.addEventListener("submit", async (e) => {
     renderPageButtons();
     updatePaginationButtons();
   } catch (error) {
+    if (error.response?.status === 400) {
+      sessionCards = [];
+      resultsContainer.textContent = "No cards found.";
+      return;
+    }
     resultsContainer.textContent = "Unable to load cards. Please try again.";
     console.error("Error fetching cards:", error.response?.status || error.message);
   }
