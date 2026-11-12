@@ -1,8 +1,9 @@
 let anchors = [];
+
 function renderAltArt(card) {
   const artContainer = document.getElementById("art-container");
 
-  for (let i = 0; i < card.card_images.length; i++) {
+  for (let i = 0; i < card.card_images?.length; i++) {
     const element = card.card_images[i];
     const image = document.createElement("img");
     const imageLink = document.createElement("a");
@@ -23,7 +24,9 @@ async function getCard(name) {
     const container = document.getElementById("single-card-info");
     if (!container) return;
 
-    const response = await axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${name}`);
+    const response = await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?", {
+      params: { name }
+    });
 
     const card = response.data?.data?.[0];
     if (!card) {
@@ -47,8 +50,20 @@ function render(card, container, imgSource) {
   details.setAttribute("id", "cardFullDetails");
 
   const list = document.createElement("ul");
+  const addToCollection = document.createElement("li");
+  const addButton = document.createElement("button");
+  addButton.type = "button";
+  addButton.textContent = "+ Add to favorites";
+
+  addButton.addEventListener("click", () => {
+    // Pending add to favorite logic
+    console.log("Added to favorites");
+  })
+
+  addToCollection.appendChild(addButton)
 
   list.append(
+    addToCollection,
     makeItem("NAME", card.name || "N/A"),
     makeItem("ARCHETYPE", card.archetype),
     makeItem("ATK", card.atk),
