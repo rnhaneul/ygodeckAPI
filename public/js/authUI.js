@@ -21,17 +21,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   const logoutBtn = document.getElementById("logoutBtn");
   const loginLink = document.querySelector(".nav-login");
   const signupLink = document.querySelector(".nav-signup");
+  const myAccountBtn = document.getElementById("my-account-btn");
 
-  if (!welcomeText || !logoutBtn) return;
+  if (!welcomeText || !logoutBtn || !myAccountBtn) return;
 
   welcomeText.hidden = true;
   logoutBtn.hidden = true;
+  myAccountBtn.hidden = true;
 
   try {
     const response = await axios.get("/myaccount");
 
     welcomeText.textContent = `Welcome back, ${response.data.username}.`;
     welcomeText.hidden = false;
+    myAccountBtn.hidden = false;
     logoutBtn.hidden = false;
 
     if (loginLink) loginLink.hidden = true;
@@ -45,6 +48,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     welcomeText.textContent = "Guest";
     welcomeText.hidden = false;
     logoutBtn.hidden = true;
+    myAccountBtn.hidden = true;
+
 
     if (loginLink) loginLink.hidden = false;
     if (signupLink) signupLink.hidden = false;

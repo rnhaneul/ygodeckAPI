@@ -95,7 +95,8 @@ input:focus-visible {
 }
 
 .nav-actions .nav-signup,
-.nav-actions .nav-logout {
+.nav-actions .nav-logout,
+.nav-actions .nav-account {
   display: inline-block;
   padding: 8px 14px;
   border: 1px solid var(--accent);
@@ -107,13 +108,15 @@ input:focus-visible {
 }
 
 .nav-actions .nav-signup:hover,
-.nav-actions .nav-logout:hover {
+.nav-actions .nav-logout:hover,
+.nav-actions .nav-account:hover {
   background: var(--accent-hover);
   color: var(--text);
   text-decoration: none;
 }
 
-.nav-actions .nav-logout:hover {
+.nav-actions .nav-logout:hover,
+.nav-actions .nav-account:hover {
   cursor: pointer;
 }
 
