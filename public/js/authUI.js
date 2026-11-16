@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   myAccountBtn.hidden = true;
 
   try {
-    const response = await axios.get("/myaccount");
+    const response = await axios.get("/login/myaccount");
 
     welcomeText.textContent = `Welcome back, ${response.data.username}.`;
     welcomeText.hidden = false;

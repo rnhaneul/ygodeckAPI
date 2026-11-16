@@ -51,8 +51,12 @@ function isAuthenticated(req, res, next) {
 }
 
 app.get("/myaccount", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "myAccount.html"))
+});
+
+app.get("/login/myaccount", isAuthenticated, (req, res) => {
   res.json({ username: req.session.user })
-})
+});
 
 // Login endpoint
 app.post("/login", async (req, res, next) => {
