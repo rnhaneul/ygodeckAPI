@@ -530,7 +530,7 @@ input:focus-visible {
    FOOTER
 ========================= */
 .footer {
-  margin-top: 30px;
+  margin-top: 6px;
   padding: 12px 16px;
   border-top: 1px solid rgba(212, 90, 99, 0.35);
   background: var(--panel);
@@ -691,4 +691,36 @@ input:focus-visible {
   .nav-actions .nav-button {
     padding: 7px 10px;
   }
+}
+
+/* 
+MyAccount Styling
+*/
+
+.my-account-container {
+  display: flex;
+  gap: 10px;
+}
+
+.my-account-container img {
+  float: left;
+  margin: 1.25%;
+}
+
+.sidebar-container {
+  flex: 1;
+  border-right: solid;
+}
+
+.sidebar h3 {
+  text-align: center;
+  border-bottom: solid;
+  padding-bottom: 18px;
+}
+
+.menu-container {
+  flex: 5;
+  border: solid;
+  margin: 5%;
+  padding: 0.50%;
 }
