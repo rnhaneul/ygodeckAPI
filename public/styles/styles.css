@@ -703,24 +703,61 @@ MyAccount Styling
 }
 
 .my-account-container img {
-  float: left;
   margin: 1.25%;
+  max-height: 35vh;
 }
 
 .sidebar-container {
   flex: 1;
   border-right: solid;
+  min-width: 140px;
+  max-width: 10%;
 }
 
 .sidebar h3 {
   text-align: center;
   border-bottom: solid;
   padding-bottom: 18px;
+  margin-right: 6px;
+  margin-left: 6px;
 }
 
 .menu-container {
   flex: 5;
-  border: solid;
-  margin: 5%;
-  padding: 0.50%;
+  margin-right: 6px;
+}
+
+
+.menu-elements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 12px;
+}
+
+.favorite-element {
+  display: flex;
+  flex-direction: column;
+}
+
+.element-options {
+  text-align: center;
+}
+
+.menu-elements a:hover {
+  cursor: pointer;
+}
+
+.sidebar-options {
+  text-align: center;
+}
+
+.sidebar-options dt {
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.menu-container h3 {
+  display: flex;
+  justify-content: center;
 }
