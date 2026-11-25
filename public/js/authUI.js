@@ -23,33 +23,38 @@ document.addEventListener("DOMContentLoaded", async () => {
   const signupLink = document.querySelector(".nav-signup");
   const myAccountBtn = document.getElementById("my-account-btn");
 
-  if (!welcomeText || !logoutBtn || !myAccountBtn) return;
-
-  welcomeText.hidden = true;
-  logoutBtn.hidden = true;
-  myAccountBtn.hidden = true;
+  if (welcomeText) welcomeText.hidden = true;
+  if (logoutBtn) logoutBtn.hidden = true;
+  if (myAccountBtn) myAccountBtn.hidden = true;
 
   try {
     const response = await axios.get("/login/account");
 
-    welcomeText.textContent = `Welcome back, ${response.data.username}.`;
-    welcomeText.hidden = false;
-    myAccountBtn.hidden = false;
-    logoutBtn.hidden = false;
+    if (welcomeText) {
+      welcomeText.textContent = `Welcome back, ${response.data.username}.`;
+      welcomeText.hidden = false;
+    }
+
+    if (myAccountBtn) myAccountBtn.hidden = false;
+    if (logoutBtn) logoutBtn.hidden = false;
 
     if (loginLink) loginLink.hidden = true;
     if (signupLink) signupLink.hidden = true;
+
     hideAccountSections();
+
   } catch (err) {
     if (err.response?.status !== 401) {
       console.error("Could not check login status:", err);
     }
 
-    welcomeText.textContent = "Guest";
-    welcomeText.hidden = false;
-    logoutBtn.hidden = true;
-    myAccountBtn.hidden = true;
+    if (welcomeText) {
+      welcomeText.textContent = "Guest";
+      welcomeText.hidden = false;
+    }
 
+    if (logoutBtn) logoutBtn.hidden = true;
+    if (myAccountBtn) myAccountBtn.hidden = true;
 
     if (loginLink) loginLink.hidden = false;
     if (signupLink) signupLink.hidden = false;
@@ -57,12 +62,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     showAccountSections();
   }
 
-  logoutBtn.addEventListener("click", async () => {
-    try {
-      await axios.post("/logout");
-      window.location.reload();
-    } catch (err) {
-      console.error("Could not log out:", err);
-    }
-  });
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await axios.post("/logout");
+        window.location.reload();
+      } catch (err) {
+        console.error("Could not log out:", err);
+      }
+    });
+  }
 });
