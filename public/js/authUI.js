@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     logoutBtn.addEventListener("click", async () => {
       try {
         await axios.post("/logout");
-        window.location.reload();
+        window.location.href = "/";
       } catch (err) {
         console.error("Could not log out:", err);
       }
