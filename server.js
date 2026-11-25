@@ -9,11 +9,13 @@ const express = require("express");
 const path = require("path");
 const { connectToDatabase } = require("./db");
 const session = require("express-session");
+
 const app = express();
 const PORT = 5000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -21,6 +23,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// Public routes
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -38,43 +42,68 @@ app.get("/card/details", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "cardDetails.html"));
 });
 
-app.get("/account", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "account.html"))
-})
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
+});
 
-// middleware to test if authenticated
+// Middleware to check authentication
+
 function isAuthenticated(req, res, next) {
   if (req.session.user) {
     return next();
   }
-  return res.status(401).json({ message: "Please login first" })
+
+  return res.status(401).json({ message: "Please login first" });
 }
 
-app.get("/myaccount", isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "myAccount.html"))
+// Protected routes
+
+app.get("/account", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "accountHome.html"));
 });
 
-app.get("/login/myaccount", isAuthenticated, (req, res) => {
-  res.json({ username: req.session.user })
+app.get("/account/favorites", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "accountFavorites.html"));
+});
+
+app.get("/account/profile", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "accountProfile.html"));
+});
+
+app.get("/account/settings", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "accountSettings.html"));
+});
+
+app.get("/login/account", isAuthenticated, (req, res) => {
+  res.json({ username: req.session.user });
 });
 
 // Login endpoint
+
 app.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
+
   if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required" });
+    return res.status(400).json({
+      message: "Username and password are required",
+    });
   }
+
   try {
     const db = await connectToDatabase();
     const usersCollection = db.collection("users");
+
     const existingUser = await usersCollection.findOne({ username });
 
     if (
       !existingUser ||
       !(await bcrypt.compare(password, existingUser.passwordHash))
     ) {
-      return res.status(401).json({ message: "Incorrect username or password" });
+      return res.status(401).json({
+        message: "Incorrect username or password",
+      });
     }
+
     req.session.regenerate(function (err) {
       if (err) return next(err);
 
@@ -83,29 +112,43 @@ app.post("/login", async (req, res, next) => {
       req.session.save(function (err) {
         if (err) return next(err);
 
-        return res.status(200).json({ message: "Login successful" });
-      })
-    })
+        return res.status(200).json({
+          message: "Login successful",
+        });
+      });
+    });
   } catch (err) {
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
   }
 });
+
+// Logout endpoint
 
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ message: "Could not log out" });
+      return res.status(500).json({
+        message: "Could not log out",
+      });
     }
-    return res.status(200).json({ message: "Logged out" });
+
+    return res.status(200).json({
+      message: "Logged out",
+    });
   });
 });
 
 // Register a new user
+
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required" });
+    return res.status(400).json({
+      message: "Username and password are required",
+    });
   }
 
   try {
@@ -113,8 +156,11 @@ app.post("/signup", async (req, res) => {
     const usersCollection = db.collection("users");
 
     const existingUser = await usersCollection.findOne({ username });
+
     if (existingUser) {
-      return res.status(409).json({ message: "Username is already taken" });
+      return res.status(409).json({
+        message: "Username is already taken",
+      });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -130,9 +176,13 @@ app.post("/signup", async (req, res) => {
       message: `User "${username}" registered successfully!`,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
   }
 });
+
+// Start server
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -103,7 +103,7 @@ if (
 
     try {
       await axios.post("/login", { username, password });
-      window.location.href = "/myaccount";
+      window.location.href = "/account";
     } catch (err) {
       const message =
         err.response?.data?.message ||

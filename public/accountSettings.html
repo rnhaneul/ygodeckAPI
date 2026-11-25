@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account | YGO API</title>
+  <link rel="stylesheet" href="/styles/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/search">Search</a>
+    </div>
+
+    <div class="nav-actions">
+      <!-- <span id="welcomeText"></span> -->
+      <a href="/myaccount">
+        <button class="nav-button nav-account" id="my-account-btn" type="button">My Account</button>
+      </a>
+      <button class="nav-button nav-logout" id="logoutBtn" type="button">Logout</button>
+    </div>
+  </nav>
+  <main class="my-account-container">
+
+    <div class="sidebar-container">
+      <div class="sidebar">
+        <h3>Account Menu</h3>
+        <dl class="sidebar-options">
+          <dt><a href="./myaccount">Home</a></dt>
+          <dt><a href="./profile">My Profile</a></dt>
+          <dt><a href="./favorites">Favorites</a></dt>
+          <dt><a href="./settings">Settings</a></dt>
+        </dl>
+      </div>
+    </div>
+
+    <div class="menu-container">
+      <h2>Settings</h2>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>© 2026 rnhaneul</p>
+  </footer>
+  <script src="/js/accountLogic.js"></script>
+  <script src="/js/authUI.js"></script>
+</body>
+
+</html>
