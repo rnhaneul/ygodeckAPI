@@ -66,6 +66,27 @@ app.get("/account/favorites", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "accountFavorites.html"));
 });
 
+app.get("/api/account/favorites", isAuthenticated, async (req, res) => {
+  const db = await connectToDatabase();
+  const userCollection = db.collection("users");
+  const currentUser = await userCollection.findOne({ username: req.session.user });
+  // console.log(currentUser);
+  return res.json({ currentUser })
+})
+
+app.post("/api/account/favorites", isAuthenticated, async (req, res) => {
+  const db = await connectToDatabase();
+  const userCollection = db.collection("users");
+  // const currentUser = await userCollection.findOne({ username: req.session.user });
+  const { favoriteImage } = req.body;
+
+  await userCollection.updateOne(
+    { username: req.session.user },
+    { $push: { favorites: favoriteImage } }
+  )
+  return res.json({ message: "Favorite added" })
+})
+
 app.get("/account/profile", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "accountProfile.html"));
 });
@@ -169,6 +190,7 @@ app.post("/signup", async (req, res) => {
       username,
       passwordHash,
       createdAt: new Date(),
+      favorites: [],
     });
 
     return res.status(201).json({

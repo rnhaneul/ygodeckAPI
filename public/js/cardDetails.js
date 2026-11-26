@@ -55,8 +55,18 @@ function render(card, container, imgSource) {
   addButton.type = "button";
   addButton.textContent = "+ Add to favorites";
 
-  addButton.addEventListener("click", () => {
+  addButton.addEventListener("click", async () => {
     // Pending add to favorite logic
+
+    try {
+      const response = await axios.post("/api/account/favorites",
+        { favoriteImage: imageUrl }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("ERROR!!!!!", error);
+    }
+
     console.log("Added to favorites");
   })
 
