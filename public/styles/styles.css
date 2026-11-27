@@ -693,9 +693,9 @@ input:focus-visible {
   }
 }
 
-/* 
-MyAccount Styling
-*/
+/* =========================
+   MyAccount STYLES
+========================= */
 
 .my-account-container {
   display: flex;
@@ -703,8 +703,8 @@ MyAccount Styling
 }
 
 .my-account-container img {
-  margin: 1.25%;
-  max-height: 35vh;
+  margin: 4%;
+  max-height: 50vh;
 }
 
 .sidebar-container {

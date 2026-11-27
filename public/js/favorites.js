@@ -19,6 +19,8 @@ async function favorites() {
       cardOptions.className = "element-options";
 
       img.src = element;
+      img.className = "cardImgs";
+
       cardButton.textContent = "Remove from favorites";
       cardLink.textContent = "View Details";
 
