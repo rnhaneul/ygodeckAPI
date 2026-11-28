@@ -70,14 +70,12 @@ app.get("/api/account/favorites", isAuthenticated, async (req, res) => {
   const db = await connectToDatabase();
   const userCollection = db.collection("users");
   const currentUser = await userCollection.findOne({ username: req.session.user });
-  // console.log(currentUser);
   return res.json({ currentUser })
 })
 
 app.post("/api/account/favorites", isAuthenticated, async (req, res) => {
   const db = await connectToDatabase();
   const userCollection = db.collection("users");
-  // const currentUser = await userCollection.findOne({ username: req.session.user });
   const { favoriteImage } = req.body;
 
   await userCollection.updateOne(
@@ -85,6 +83,26 @@ app.post("/api/account/favorites", isAuthenticated, async (req, res) => {
     { $push: { favorites: favoriteImage } }
   )
   return res.json({ message: "Favorite added" })
+})
+
+// Delete favorites
+
+app.delete("/api/account/favorites", isAuthenticated, async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    const userCollection = db.collection("users");
+    const { favoriteImage } = req.body;
+
+    await userCollection.updateOne(
+      { username: req.session.user },
+      { $pull: { favorites: favoriteImage } }
+    )
+
+    return res.json({ message: "Favorite removed" })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ message: "Something went wrong deleting this favorite item." })
+  }
 })
 
 app.get("/account/profile", isAuthenticated, (req, res) => {
